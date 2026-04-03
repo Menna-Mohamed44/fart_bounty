@@ -1,0 +1,532 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal {
+  background: #0a0a12;
+  border: 2px solid #00ff66;
+  border-radius: 16px;
+  padding: 34px 30px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 0 60px rgba(0, 255, 102, 0.2), inset 0 0 80px rgba(0, 0, 0, 0.5);
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #888;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  z-index: 10;
+  padding: 0;
+}
+
+.closeButton:hover {
+  color: #fff;
+}
+
+.title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: -8px;
+}
+
+.titleWhite {
+  color: #ffffff;
+}
+
+.titleGreen {
+  color: #00ff66;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 180px);
+  gap: 28px;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* Base card styling */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* CSS-only card body with neon glow effect */
+.cardBody {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Teal card variant */
+.cardTeal {
+  background: linear-gradient(180deg, #030e0e 0%, #061414 50%, #030e0e 100%);
+  border: 2px solid #00e5e5;
+  box-shadow: 
+    0 0 25px rgba(0, 229, 229, 0.5),
+    0 0 50px rgba(0, 229, 229, 0.2),
+    inset 0 1px 0 rgba(0, 229, 229, 0.4),
+    inset 0 -1px 0 rgba(0, 229, 229, 0.2);
+}
+
+.cardTeal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, #00e5e5 0%, transparent 70%);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+.cardTeal::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, #00e5e5 0%, transparent 70%);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+/* Green card variant */
+.cardGreen {
+  background: linear-gradient(180deg, #030e05 0%, #061408 50%, #030e05 100%);
+  border: 2px solid #00ff66;
+  box-shadow: 
+    0 0 25px rgba(0, 255, 102, 0.5),
+    0 0 50px rgba(0, 255, 102, 0.2),
+    inset 0 1px 0 rgba(0, 255, 102, 0.4),
+    inset 0 -1px 0 rgba(0, 255, 102, 0.2);
+}
+
+.cardGreen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, #00ff66 0%, transparent 70%);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+.cardGreen::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, #00ff66 0%, transparent 70%);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+/* Orange card variant */
+.cardOrange {
+  background: linear-gradient(180deg, #0e0803 0%, #141006 50%, #0e0803 100%);
+  border: 2px solid #ff9500;
+  box-shadow: 
+    0 0 25px rgba(255, 149, 0, 0.5),
+    0 0 50px rgba(255, 149, 0, 0.2),
+    inset 0 1px 0 rgba(255, 149, 0, 0.4),
+    inset 0 -1px 0 rgba(255, 149, 0, 0.2);
+}
+
+.cardOrange::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, #ff9500 0%, transparent 70%);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+.cardOrange::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, #ff9500 0%, transparent 70%);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+/* Red card variant */
+.cardRed {
+  background: linear-gradient(180deg, #0e0303 0%, #140606 50%, #0e0303 100%);
+  border: 2px solid #ff4040;
+  box-shadow: 
+    0 0 25px rgba(255, 64, 64, 0.5),
+    0 0 50px rgba(255, 64, 64, 0.2),
+    inset 0 1px 0 rgba(255, 64, 64, 0.4),
+    inset 0 -1px 0 rgba(255, 64, 64, 0.2);
+}
+
+.cardRed::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, #ff4040 0%, transparent 70%);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+.cardRed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: radial-gradient(ellipse at center, #ff4040 0%, transparent 70%);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+/* Content area inside card */
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 16px 12px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: left;
+  align-self: flex-start;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.cardPrice {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  text-align: left;
+  align-self: flex-start;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.priceFree {
+  color: #b8ffb8;
+}
+
+.priceGreen {
+  color: #00ff66;
+}
+
+.priceOrange {
+  color: #fff;
+}
+
+.priceRed {
+  color: #fff;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.featureItem {
+  font-size: 12px;
+  color: #e0e0e0;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.featureHeader {
+  font-size: 11px;
+  color: #999;
+  font-style: italic;
+  line-height: 1.4;
+  margin-bottom: 2px;
+  list-style: none;
+}
+
+.featureHighlight {
+  color: #00ff66;
+  font-weight: 600;
+}
+
+.featureAllGreen {
+  color: #00ff66;
+}
+
+/* Bottom button area with glowing rectangle effect */
+.cardButtonArea {
+  padding: 12px 16px 16px;
+  z-index: 2;
+}
+
+.cardButton {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.buttonTeal {
+  background: rgba(0, 200, 200, 0.3);
+  color: #00e5e5;
+  border: 1px solid rgba(0, 229, 229, 0.6);
+  box-shadow: 0 0 15px rgba(0, 229, 229, 0.4);
+}
+
+.buttonTeal:hover {
+  background: rgba(0, 200, 200, 0.5);
+  box-shadow: 0 0 20px rgba(0, 229, 229, 0.6);
+}
+
+.buttonGreen {
+  background: rgba(0, 200, 50, 0.3);
+  color: #00ff66;
+  border: 1px solid rgba(0, 255, 102, 0.6);
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+}
+
+.buttonGreen:hover {
+  background: rgba(0, 200, 50, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.6);
+}
+
+.buttonOrange {
+  background: rgba(200, 130, 0, 0.3);
+  color: #ffc040;
+  border: 1px solid rgba(255, 192, 64, 0.6);
+  box-shadow: 0 0 15px rgba(255, 192, 64, 0.4);
+}
+
+.buttonOrange:hover {
+  background: rgba(200, 130, 0, 0.5);
+  box-shadow: 0 0 20px rgba(255, 192, 64, 0.6);
+}
+
+.buttonRed {
+  background: rgba(200, 30, 30, 0.3);
+  color: #ff5050;
+  border: 1px solid rgba(255, 80, 80, 0.6);
+  box-shadow: 0 0 15px rgba(255, 80, 80, 0.4);
+}
+
+.buttonRed:hover {
+  background: rgba(236, 9, 9, 0.5);
+  box-shadow: 0 0 20px rgba(255, 80, 80, 0.6);
+}
+
+.buttonActive {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* MOST POPULAR ribbon */
+.ribbon {
+  position: absolute;
+  top: 8px;
+  left: -38px;
+  background: linear-gradient(135deg, #ff9500 0%, #ffb340 50%, #ff9500 100%);
+  color: #000;
+  font-size: 8px;
+  font-weight: 700;
+  padding: 4px 36px;
+  transform: rotate(-35deg);
+  z-index: 3;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  box-shadow: 0 2px 8px rgba(255, 149, 0, 0.5);
+}
+
+/* Current tier badge */
+.currentBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #00ff66;
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 10px;
+  z-index: 3;
+  text-transform: uppercase;
+}
+
+/* Loading state */
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 14px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #00ff66;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success toast */
+.successToast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00ff66;
+  color: #000;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 10001;
+  animation: toastIn 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 255, 102, 0.3);
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .cardBody {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .modal {
+    padding: 24px 16px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .cardBody {
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 520px) {
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .modal {
+    padding: 20px 12px;
+  }
+
+  .cardBody {
+    min-height: 360px;
+  }
+}

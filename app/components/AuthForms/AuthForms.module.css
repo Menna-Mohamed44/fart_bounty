@@ -1,0 +1,347 @@
+.formContainer {
+  width: 100%;
+}
+
+.authContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.75rem 1.5rem 2rem;
+}
+
+.inlineClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  color: #0bda51;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inlineClose svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.inlineClose:hover {
+  transform: scale(1.05);
+  color: #32ff7e;
+}
+
+.cardHeader {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0bda51;
+  letter-spacing: -0.02em;
+}
+
+.cardSubtitle {
+  margin: 0;
+  color: rgba(194, 255, 216, 0.8);
+  font-size: 1rem;
+}
+
+.authContent + .cardHeader {
+  margin-top: 0.5rem;
+}
+
+.modeToggle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem;
+  background: rgba(11, 218, 81, 0.08);
+  border: 1px solid rgba(11, 218, 81, 0.25);
+  padding: 0.25rem;
+  border-radius: 999px;
+}
+
+.toggleButton {
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(194, 255, 216, 0.75);
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggleButtonActive {
+  background: #0bda51;
+  color: #071007;
+  border-color: #0bda51;
+  box-shadow: 0 10px 25px rgba(11, 218, 81, 0.35);
+}
+
+.toggleButton:not(.toggleButtonActive):hover {
+  background: rgba(11, 218, 81, 0.15);
+  color: #0ef05e;
+}
+
+.socialButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+}
+
+.googleButton,
+.facebookButton,
+.appleButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(11, 218, 81, 0.08);
+  color: #e6fff2;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.googleButton:hover,
+.facebookButton:hover,
+.appleButton:hover {
+  background: rgba(11, 218, 81, 0.15);
+  border-color: rgba(11, 218, 81, 0.35);
+  transform: translateY(-1px);
+}
+
+.socialIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.socialIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(194, 255, 216, 0.55);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(11, 218, 81, 0), rgba(11, 218, 81, 0.35), rgba(11, 218, 81, 0));
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary, #e6fff2);
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(11, 218, 81, 0.12);
+  border: 1px solid rgba(11, 218, 81, 0.35);
+  border-radius: 0.75rem;
+  color: var(--text-primary, #e6fff2);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #0ef05e;
+  box-shadow: 0 0 0 3px rgba(11, 218, 81, 0.2);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input::placeholder {
+  color: rgba(194, 255, 216, 0.6);
+}
+
+/* Force green styling even when browser autofills */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--text-primary, #e6fff2) !important;
+  -webkit-box-shadow: 0 0 0 1000px rgba(11, 218, 81, 0.12) inset !important;
+  border: 1px solid rgba(11, 218, 81, 0.35) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  background: #0bda51;
+  color: #0b140d;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 16px rgba(11, 218, 81, 0.3);
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #0ef05e;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(11, 218, 81, 0.4);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  padding: 0.75rem 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 0.5rem;
+  color: #fca5a5;
+  font-size: 0.9rem;
+}
+
+.switchPrompt {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color, rgba(109, 255, 177, 0.2));
+  text-align: center;
+  color: var(--text-secondary, #c2ffd8);
+  font-size: 0.95rem;
+}
+
+.switchButton {
+  background: none;
+  border: none;
+  color: #0bda51;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+.switchButton:hover {
+  color: #0ef05e;
+  text-decoration: underline;
+}
+
+.agreementText {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(194, 255, 216, 0.6);
+  line-height: 1.6;
+}
+
+.agreementText a {
+  color: #0bda51;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.agreementText a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 540px) {
+  .authCard {
+    padding: 1.75rem 1.25rem;
+    border-radius: 0.85rem;
+  }
+
+  .cardTitle {
+    font-size: 1.6rem;
+  }
+
+  .modeToggle {
+    padding: 0.35rem;
+  }
+
+  .toggleButton {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .googleButton {
+    font-size: 0.95rem;
+  }
+}

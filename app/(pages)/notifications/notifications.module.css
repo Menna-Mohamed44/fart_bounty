@@ -1,0 +1,361 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.headerContent {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.headerIcon {
+  color: var(--accent-primary);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.header p {
+  margin: 0.5rem 0 0 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.headerActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.markAllButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.markAllButton:hover {
+  background: var(--bg-accent);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.filterTabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-primary);
+}
+
+.filterTab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: -2px;
+}
+
+.filterTab:hover {
+  color: var(--text-primary);
+}
+
+.filterTab.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 0.5rem;
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.filterTab.active .count {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.loading,
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-primary);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading p,
+.empty p {
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0 0;
+}
+
+.emptyIcon {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.empty h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+}
+
+.notificationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.notificationCard {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.notificationCard:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.notificationCard.unread {
+  background: var(--bg-accent);
+  border-color: var(--accent-primary);
+}
+
+.notificationIcon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+}
+
+.notificationCard.unread .notificationIcon {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.iconChallenge { color: #ff6b35; }
+.iconActive { color: #22c55e; }
+.iconVoting { color: #3b82f6; }
+.iconWon { color: #fbbf24; }
+.iconLost { color: #ef4444; }
+.iconDraw { color: #a855f7; }
+.iconCancelled { color: #9ca3af; }
+
+.notificationContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.notificationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.notificationHeader h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.time {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.message {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.acceptButton,
+.declineButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.acceptButton {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.acceptButton:hover:not(:disabled) {
+  background: var(--accent-secondary);
+  transform: translateY(-1px);
+}
+
+.declineButton {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+}
+
+.declineButton:hover:not(:disabled) {
+  background: var(--error);
+  color: white;
+  border-color: var(--error);
+}
+
+.acceptButton:disabled,
+.declineButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.deleteButton:hover {
+  background: var(--error);
+  color: white;
+}
+
+.unreadDot {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 10px;
+  height: 10px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .headerContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .filterTabs {
+    gap: 0.5rem;
+  }
+
+  .filterTab {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .notificationCard {
+    padding: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .acceptButton,
+  .declineButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

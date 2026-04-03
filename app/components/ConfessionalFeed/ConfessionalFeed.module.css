@@ -1,0 +1,308 @@
+.actionsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.commentToggle {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.commentToggle:hover {
+  background: rgba(34, 197, 94, 0.15);
+  box-shadow: 0 8px 18px rgba(34, 197, 94, 0.25);
+  transform: translateY(-1px);
+}
+
+.commentsPanel {
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(148, 210, 189, 0.35);
+  border-radius: 14px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.commentList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.commentItem {
+  background: rgba(15, 118, 110, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.commentMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.commentMeta span:first-child {
+  font-weight: 600;
+}
+
+.commentContent {
+  color: rgba(226, 245, 237, 0.95);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.noComments,
+.loginNotice {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.commentTextarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 210, 189, 0.35);
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--text-primary, #f8fafc);
+  padding: 0.75rem;
+  resize: none;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.commentTextarea:focus {
+  outline: none;
+  border-color: rgba(34, 197, 94, 0.65);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+}
+
+.commentSubmit {
+  align-self: flex-end;
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 1.2rem;
+  background: linear-gradient(135deg, #22c55e, #0ea5e9);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.commentSubmit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.35);
+}
+
+.commentSubmit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.container {
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h2 {
+  font-size: 2.25rem;
+  margin-bottom: 0.4rem;
+  font-family: 'Baloo 2', 'Comic Neue', 'Comic Sans MS', cursive;
+  font-weight: 600;
+  color: transparent;
+  background: linear-gradient(135deg, #22c55e 0%, #10b981 50%, #059669 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: 0.04em;
+}
+
+.header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.error {
+  text-align: center;
+  padding: 3rem;
+  color: var(--error-color, #ff4444);
+  background: var(--error-bg, #fff5f5);
+  border-radius: 8px;
+  border: 1px solid var(--error-border, #fed7d7);
+}
+
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.empty p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.confessionalCard {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.confessionalCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.videoContainer {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: rgba(15, 23, 42, 0.9);
+  overflow: hidden;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.confessionalInfo {
+  padding: 1.25rem;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.anonymous {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.timeAgo {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.reactions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.reactionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 20px;
+  background: rgba(30, 41, 59, 0.5);
+  color: rgba(226, 232, 240, 0.85);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  backdrop-filter: blur(4px);
+}
+
+.reactionButton:hover {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+.reactionButton.active {
+  background: rgba(34, 197, 94, 0.25);
+  border-color: rgba(34, 197, 94, 0.6);
+  color: #22c55e;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+}
+
+.reactionEmoji {
+  font-size: 1rem;
+}
+
+.reactionCount {
+  font-weight: 500;
+  min-width: 1rem;
+  text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h2 {
+    font-size: 1.5rem;
+  }
+
+  .confessionalCard {
+    margin: 0 -0.5rem;
+  }
+
+  .reactions {
+    justify-content: center;
+  }
+
+  .reactionButton {
+    padding: 0.375rem 0.625rem;
+    font-size: 0.8rem;
+  }
+}

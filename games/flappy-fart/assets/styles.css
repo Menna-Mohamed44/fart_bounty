@@ -1,0 +1,74 @@
+/* Basic game assets and sprites */
+/* These are placeholder styles - replace with actual assets later */
+
+.game-bird {
+    /* Bird sprite would go here */
+    width: 40px;
+    height: 30px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.game-pipe {
+    /* Pipe sprite would go here */
+    background: #4ecdc4;
+    position: absolute;
+}
+
+.game-background {
+    /* Background sprite would go here */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.game-ground {
+    /* Ground sprite would go here */
+    background: #8b4513;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+}
+
+/* Particle effects for when bird farts */
+.fart-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: fartFloat 1s ease-out forwards;
+}
+
+@keyframes fartFloat {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px) scale(0.3);
+        opacity: 0;
+    }
+}
+
+/* Sound effects (visual feedback) */
+.sound-wave {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: soundPulse 0.5s ease-out;
+}
+
+@keyframes soundPulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}

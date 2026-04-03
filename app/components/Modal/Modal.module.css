@@ -1,0 +1,117 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.modal {
+  background: linear-gradient(135deg, rgba(11, 20, 13, 0.98), rgba(15, 30, 18, 0.98));
+  border-radius: 1rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(11, 218, 81, 0.45);
+  border: 1px solid #0bda51;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: modalSlideIn 0.3s ease-out;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10000;
+  scrollbar-gutter: stable;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid rgba(109, 255, 177, 0.2);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e6fff2;
+  letter-spacing: -0.02em;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #c2ffd8;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+}
+
+.closeButton:hover {
+  background: rgba(109, 255, 177, 0.1);
+  color: #6dffb1;
+  transform: scale(1.05);
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+/* Custom scrollbar styling for modal */
+.modal::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: rgba(11, 218, 81, 0.3);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(11, 218, 81, 0.5);
+  background-clip: padding-box;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal {
+    margin: 0;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .header,
+  .content {
+    padding: 1rem;
+  }
+}

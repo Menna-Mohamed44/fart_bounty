@@ -1,0 +1,286 @@
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 0.75rem;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #90ee90;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+  text-shadow: 0 0 30px rgba(144, 238, 144, 0.3), 0 0 60px rgba(144, 238, 144, 0.1);
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #90ee90;
+  margin: 0 0 1.25rem;
+  text-shadow: 0 0 15px rgba(144, 238, 144, 0.2);
+}
+
+.heroDescription {
+  font-size: 1rem;
+  color: #ffffff;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+/* Section Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab {
+  padding: 0.65rem 1.5rem;
+  background: rgba(144, 238, 144, 0.08);
+  border: 1px solid rgba(144, 238, 144, 0.2);
+  border-radius: 0.5rem;
+  color: #90ee90;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  background: rgba(144, 238, 144, 0.15);
+  border-color: rgba(144, 238, 144, 0.4);
+}
+
+.tabActive {
+  background: rgba(144, 238, 144, 0.2);
+  border-color: #90ee90;
+  box-shadow: 0 0 16px rgba(144, 238, 144, 0.15);
+}
+
+/* FAQ Section */
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #90ee90;
+  text-align: center;
+  margin: 0 0 1.25rem;
+  text-shadow: 0 0 12px rgba(144, 238, 144, 0.2);
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faqItem {
+  background: linear-gradient(135deg, rgba(10, 20, 16, 0.95) 0%, rgba(5, 12, 10, 0.98) 100%);
+  border: 1px solid rgba(144, 238, 144, 0.15);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faqItem:hover {
+  border-color: rgba(144, 238, 144, 0.3);
+}
+
+.faqQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.faqQuestion:hover {
+  background: rgba(144, 238, 144, 0.05);
+}
+
+.faqQuestion svg {
+  color: #90ee90;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.faqQuestionOpen svg {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  padding: 0 1.5rem 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.faqAnswer a {
+  color: #90ee90;
+  text-decoration: underline;
+}
+
+/* Guidelines Section */
+.guidelinesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.guidelineCard {
+  background: linear-gradient(135deg, rgba(10, 20, 16, 0.95) 0%, rgba(5, 12, 10, 0.98) 100%);
+  border: 1px solid rgba(144, 238, 144, 0.15);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.guidelineCard:hover {
+  border-color: rgba(144, 238, 144, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(144, 238, 144, 0.08);
+}
+
+.guidelineIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(144, 238, 144, 0.1);
+  border: 1px solid rgba(144, 238, 144, 0.2);
+  border-radius: 0.75rem;
+  color: #90ee90;
+  margin-bottom: 1rem;
+}
+
+.guidelineTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+}
+
+.guidelineText {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Contact Section */
+.contactSection {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, rgba(10, 20, 16, 0.95) 0%, rgba(5, 12, 10, 0.98) 100%);
+  border: 1px solid rgba(144, 238, 144, 0.15);
+  border-radius: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contactTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #90ee90;
+  margin: 0 0 0.5rem;
+}
+
+.contactText {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 1.25rem;
+  line-height: 1.5;
+}
+
+.contactButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: rgba(144, 238, 144, 0.15);
+  border: 1px solid rgba(144, 238, 144, 0.4);
+  border-radius: 0.5rem;
+  color: #90ee90;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.contactButton:hover {
+  background: rgba(144, 238, 144, 0.25);
+  border-color: #90ee90;
+  box-shadow: 0 0 16px rgba(144, 238, 144, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .heroTitle {
+    font-size: 2.25rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.15rem;
+  }
+
+  .heroDescription {
+    font-size: 0.9rem;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  .guidelinesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .faqQuestion {
+    font-size: 0.9rem;
+    padding: 1rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+}

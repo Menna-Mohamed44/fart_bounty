@@ -1,0 +1,610 @@
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--gradient-primary, #0f1419 0%, #1e2a35 50%, #2d3f4a 100%));
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(135deg, #22c55e 0%, #10b981 50%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 40px rgba(34, 197, 94, 0.3);
+}
+
+.header p {
+  font-size: 1.1rem;
+  color: rgba(226, 232, 240, 0.8);
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.backButton {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.backButton:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Feed Section */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heroSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  padding: 1rem;
+}
+
+.infoPanel,
+.createSection {
+  flex: 1 1 280px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.createSection {
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  min-height: 420px;
+  justify-content: flex-start;
+}
+
+.infoPanel {
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%;
+  max-width: 320px;
+  min-height: 0;
+  max-height: 426.66px;
+  height: 100%;
+  padding: 1.8rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.2) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  box-shadow: 0 20px 50px rgba(6, 78, 59, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: #defce7;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.infoPanel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(6, 78, 59, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.infoPanel h2 {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+}
+
+.heroHighlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.heroHighlights li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.75rem 0.95rem;
+  border-radius: 14px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+}
+
+.heroHighlights li strong {
+  font-weight: 600;
+}
+
+.recordingFrame {
+  width: 100%;
+  max-width: 320px;
+  min-height: 420px;
+  aspect-ratio: 3 / 4;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  background: rgba(15, 20, 25, 0.95);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.recordingFrame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.recorderWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.recordingImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.createCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.createCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.createCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.createCard h3 {
+  color: var(--text-primary, #ffffff);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.createCard p {
+  color: var(--text-secondary, #cccccc);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.featureIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-primary, #22c55e);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.feature:hover .featureIcon {
+  transform: scale(1.1);
+  color: var(--accent-secondary, #16a34a);
+}
+
+.feature span {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.startRecordingButton {
+  background: var(--accent-secondary);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.01rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+
+.startRecordingButton:hover {
+  background: #058846;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.45);
+}
+
+/* Recording Section */
+.recordingSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Effects Section */
+.effectsSection {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.effectsLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.videoPreview {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.previewVideo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.controlsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.visibilitySection {
+  background: var(--bg-secondary, #f8fafc);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.visibilityToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.visibilityToggle input[type="checkbox"] {
+  accent-color: var(--accent-color, #3b82f6);
+  transform: scale(1.1);
+}
+
+.visibilityHelp {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.cancelButton,
+.continueButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.cancelButton {
+  background: var(--bg-secondary, #f8fafc);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color, #e2e8f0);
+}
+
+.cancelButton:hover {
+  background: var(--bg-hover, #f1f5f9);
+  color: var(--text-primary);
+}
+
+.continueButton {
+  background: var(--accent-color, #3b82f6);
+  color: white;
+}
+
+.continueButton:hover {
+  background: var(--accent-hover, #2563eb);
+}
+
+/* Legacy styles for backward compatibility */
+.confessionalArea {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.confessionalCard {
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 600px;
+}
+
+.confessionalHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.userAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gradient-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  overflow: hidden;
+}
+
+.userAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.anonymous {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.confessionalContent {
+  margin-bottom: 2rem;
+}
+
+.confessionalInput {
+  width: 100%;
+  min-height: 200px;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.confessionalInput:focus {
+  border-color: var(--accent-color);
+}
+
+.confessionalInput::placeholder {
+  color: var(--text-secondary);
+}
+
+.confessionalActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.confessionalOptions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.option input[type="checkbox"] {
+  accent-color: var(--accent-color);
+}
+
+.recordButton {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, var(--gradient-primary));
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.recordButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.recordButton:active {
+  transform: translateY(0);
+}
+
+.disclaimer {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.disclaimer p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Mute overlay shown when voice filter is selected */
+.muteOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.6rem 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: rgba(226, 232, 240, 0.85);
+  font-size: 0.8rem;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.videoPreview {
+  position: relative;
+}
+
+/* Spinner for the continue button */
+.btnSpinner {
+  animation: btnSpin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes btnSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.continueButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.continueButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .effectsLayout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .controlsSection {
+    gap: 1.5rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .cancelButton,
+  .continueButton {
+    width: 100%;
+  }
+
+  .features {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .createCard {
+    padding: 1.5rem;
+  }
+}

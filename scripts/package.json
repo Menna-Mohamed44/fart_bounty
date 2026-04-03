@@ -1,0 +1,18 @@
+{
+  "name": "fart-bounty-scripts",
+  "version": "1.0.0",
+  "description": "Scripts for managing audio library and bot system",
+  "main": "bulk-insert-audio-library.js",
+  "scripts": {
+    "insert-audio": "node bulk-insert-audio-library.js",
+    "seed-bots": "node seed-bots.js",
+    "seed-bots-v2": "node seed-bots-v2.js",
+    "enable-bots": "node enable-bots.js",
+    "seed-manual-bots": "node seed-manual-bots.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
+    "dotenv": "^17.3.1",
+    "music-metadata": "^8.1.4"
+  }
+}

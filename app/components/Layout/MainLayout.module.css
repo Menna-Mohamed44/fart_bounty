@@ -1,0 +1,65 @@
+/* Main Layout Container */
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-image: url('/gas%20background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: var(--bg-primary);
+  position: relative;
+}
+
+.container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 16, 7, 0.75) 0%, rgba(11, 20, 13, 0.8) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Main Content Area */
+.main {
+  position: fixed;
+  left: 280px;
+  right: 320px;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+/* When sidebar is hidden (landing page) */
+.noSidebar {
+  left: 0 !important;
+  right: 0 !important;
+}
+
+/* When right sidebar is hidden (hall-of-fame page) */
+.noRightSidebar {
+  right: 0 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1440px) {
+  .main {
+    right: 280px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main {
+    left: 240px;
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    left: 0;
+    right: 0;
+  }
+}

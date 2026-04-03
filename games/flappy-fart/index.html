@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Fart - Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Start Screen -->
+        <div id="startScreen" class="screen">
+            <div class="game-title">🚀 FLAPPY FART</div>
+            <div class="game-subtitle">Propel yourself through the sky with your fart!</div>
+            <button id="startButton" class="start-button">🎮 START GAME</button>
+            <div class="instructions">
+                <p>🖱️ Click or tap to fart and fly!</p>
+                <p>🎯 Avoid the pipes and try to get the highest score!</p>
+                <p>🏆 Beat your high score and climb the leaderboard!</p>
+            </div>
+        </div>
+
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverScreen" class="screen hidden">
+            <div class="game-over-content">
+                <h2>💥 GAME OVER</h2>
+                <div class="score-display">
+                    <p>Score: <span id="finalScore">0</span></p>
+                    <p>Best: <span id="bestScore">0</span></p>
+                </div>
+                <button id="restartButton" class="restart-button">🔄 PLAY AGAIN</button>
+                <button id="leaderboardButton" class="leaderboard-button">🏆 LEADERBOARD</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="leaderboardScreen" class="screen hidden">
+            <div class="leaderboard-content">
+                <div class="leaderboard-header">
+                    <h2>🏆 LEADERBOARD</h2>
+                    <button id="backButton" class="back-button">← Back</button>
+                </div>
+                <div id="leaderboardList" class="leaderboard-list">
+                    <div class="loading">Loading leaderboard...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="screen">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Connecting to database...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

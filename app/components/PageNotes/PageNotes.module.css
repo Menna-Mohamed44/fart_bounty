@@ -1,0 +1,115 @@
+.fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #16a34a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 90;
+}
+
+.panel {
+  position: fixed;
+  right: 1rem;
+  bottom: 3.9rem;
+  width: min(360px, calc(100vw - 2rem));
+  max-height: 70vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #111113;
+  z-index: 90;
+  padding: 0.8rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h4 {
+  margin: 0;
+  color: #fff;
+}
+
+.pathLabel {
+  margin: 0.25rem 0 0.7rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.inputRow {
+  margin-bottom: 0.7rem;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #18181b;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.55rem;
+  resize: vertical;
+}
+
+.addBtn {
+  margin-top: 0.45rem;
+  border: none;
+  border-radius: 8px;
+  background: #16a34a;
+  color: #fff;
+  padding: 0.4rem 0.6rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  cursor: pointer;
+}
+
+.list {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.noteCard {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.5rem;
+}
+
+.noteCard p {
+  margin: 0 0 0.35rem;
+  color: #e4e4e7;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+.noteMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.iconBtn {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+}
+
+.empty {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.84rem;
+}
