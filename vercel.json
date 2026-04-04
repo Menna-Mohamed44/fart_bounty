@@ -1,8 +1,1 @@
-{
-  "crons": [
-    {
-      "path": "/api/bots/schedule",
-      "schedule": "0 */2 * * *"
-    }
-  ]
-}
+{}
