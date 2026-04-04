@@ -338,23 +338,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       // Save the flow type to BOTH localStorage AND pass via URL
       const flowType = isSignup ? 'signup' : 'signin'
-      console.log('🔐 Google OAuth starting, isSignup:', isSignup, 'flowType:', flowType)
-      
+
       if (typeof window !== 'undefined') {
         localStorage.setItem('oauth_flow', flowType)
-        // Also store in sessionStorage as backup
         sessionStorage.setItem('oauth_flow', flowType)
-        // Store an explicit post-auth redirect to make the callback deterministic
         const redirectTarget = isSignup ? '/welcome' : '/home'
         localStorage.setItem('post_auth_redirect', redirectTarget)
         sessionStorage.setItem('post_auth_redirect', redirectTarget)
-        console.log('📝 Saved oauth_flow:', flowType)
       }
 
-      // Pass the flow type in the redirect URL as well
       const nextTarget = isSignup ? '/welcome' : '/home'
       const redirectUrl = `${window.location.origin}/auth/callback?flow=${flowType}&next=${encodeURIComponent(nextTarget)}`
-      console.log('🔗 Redirect URL:', redirectUrl)
 
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
