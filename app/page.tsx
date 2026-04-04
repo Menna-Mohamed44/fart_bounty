@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from './context/AuthContext'
 import { AuthModal } from './components/AuthForms/AuthModal'
 import styles from './LandingPage.module.css'
-import { Medal, Trophy, Users, Sparkles, ShieldCheck, Mail, MessageCircle, Brain } from 'lucide-react'
+import { Medal, Trophy, Users, Sparkles, ShieldCheck, Mail, MessageCircle, Brain, Menu, X } from 'lucide-react'
 
 export default function LandingPage() {
   const { session } = useAuth()
@@ -13,6 +13,29 @@ export default function LandingPage() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [authModalMode, setAuthModalMode] = useState<'signin' | 'signup'>('signin')
   const [isRedirecting, setIsRedirecting] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [mobileMenuOpen])
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const mq = window.matchMedia('(max-width: 768px)')
+    if (!mq.matches) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [mobileMenuOpen])
+
+  const closeMobileMenu = () => setMobileMenuOpen(false)
 
   // Redirect authenticated users to home page
   // BUT: Skip redirect if this is a new signup (AuthModal handles that)
@@ -52,15 +75,57 @@ export default function LandingPage() {
     <>
     <div className={styles.page}>
       <header className={styles.navbar}>
+        {mobileMenuOpen && (
+          <div
+            className={styles.navBackdrop}
+            aria-hidden="true"
+            onClick={closeMobileMenu}
+          />
+        )}
         <div className={styles.navInner}>
-          <div className={styles.navBrand} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <div
+            className={styles.navBrand}
+            onClick={() => {
+              closeMobileMenu()
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          >
             Fart Bounty
           </div>
-          <nav className={styles.navLinks} aria-label="Primary">
-            <a href="#features" className={styles.navLink}>Features</a>
-            <a href="#about" className={styles.navLink}>About</a>
-            <a href="#contact" className={styles.navLink}>Contact</a>
-            <button className={styles.navSignIn} onClick={openSignInModal}>Sign In</button>
+          <button
+            type="button"
+            className={styles.navToggle}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="landing-primary-nav"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            onClick={() => setMobileMenuOpen((o) => !o)}
+          >
+            {mobileMenuOpen ? <X size={26} strokeWidth={2.25} /> : <Menu size={26} strokeWidth={2.25} />}
+          </button>
+          <nav
+            id="landing-primary-nav"
+            className={`${styles.navLinks} ${mobileMenuOpen ? styles.navLinksOpen : ''}`}
+            aria-label="Primary"
+          >
+            <a href="#features" className={styles.navLink} onClick={closeMobileMenu}>
+              Features
+            </a>
+            <a href="#about" className={styles.navLink} onClick={closeMobileMenu}>
+              About
+            </a>
+            <a href="#contact" className={styles.navLink} onClick={closeMobileMenu}>
+              Contact
+            </a>
+            <button
+              type="button"
+              className={styles.navSignIn}
+              onClick={() => {
+                closeMobileMenu()
+                openSignInModal()
+              }}
+            >
+              Sign In
+            </button>
           </nav>
         </div>
       </header>
