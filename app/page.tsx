@@ -8,11 +8,10 @@ import styles from './LandingPage.module.css'
 import { Medal, Trophy, Users, Sparkles, ShieldCheck, Mail, MessageCircle, Brain, Menu, X } from 'lucide-react'
 
 export default function LandingPage() {
-  const { session } = useAuth()
+  const { session, loading: authLoading } = useAuth()
   const router = useRouter()
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [authModalMode, setAuthModalMode] = useState<'signin' | 'signup'>('signin')
-  const [isRedirecting, setIsRedirecting] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -37,36 +36,26 @@ export default function LandingPage() {
 
   const closeMobileMenu = () => setMobileMenuOpen(false)
 
-  // Redirect authenticated users to home page
-  // BUT: Skip redirect if this is a new signup (AuthModal handles that)
+  // Redirect authenticated users to home — wait until auth has finished hydrating
+  // so a brief `session: false` during load is not treated as "signed out".
   useEffect(() => {
-    console.log('🔍 Landing page useEffect - session:', !!session)
-    
-    if (session) {
-      // Check if this is a new signup
-      const isNewSignup = sessionStorage.getItem('is_new_signup')
-      console.log('📝 is_new_signup flag:', isNewSignup)
-      
-      if (isNewSignup === 'true') {
-        // Clear the flag - AuthModal will handle the redirect to /welcome
-        console.log('🟢 New signup detected - NOT redirecting to home')
-        sessionStorage.removeItem('is_new_signup')
-      } else {
-        // Regular signin - redirect to home
-        console.log('🔵 Existing user - redirecting to /home')
-        router.push('/home')
-      }
+    if (authLoading) return
+    if (!session) return
+
+    const isNewSignup = sessionStorage.getItem('is_new_signup')
+    if (isNewSignup === 'true') {
+      sessionStorage.removeItem('is_new_signup')
+    } else {
+      router.push('/home')
     }
-  }, [session, router])
+  }, [session, authLoading, router])
 
   const openSignInModal = () => {
-    console.log('🔵 openSignInModal clicked')
     setAuthModalMode('signin')
     setIsAuthModalOpen(true)
   }
 
   const openSignUpModal = () => {
-    console.log('🟢 openSignUpModal clicked')
     setAuthModalMode('signup')
     setIsAuthModalOpen(true)
   }
