@@ -64,4 +64,9 @@
     top: 66px;
     padding-top: 0.35rem;
   }
+
+  .main.landingMain {
+    top: 0;
+    padding-top: 0;
+  }
 }
