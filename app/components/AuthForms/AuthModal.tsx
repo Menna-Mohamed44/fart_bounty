@@ -104,11 +104,9 @@ export function AuthModal({ isOpen, onClose, initialMode = 'signin' }: AuthModal
             type="button"
             className={styles.googleButton}
             onClick={async () => {
-              console.log('🔵 Google button clicked - current mode:', mode)
               setGoogleError(null)
               setGoogleLoading(true)
               const isSignupMode = mode === 'signup'
-              console.log('🔵 isSignupMode:', isSignupMode)
               try {
                 const { error } = await signInWithGoogle(isSignupMode)
                 if (error) {
