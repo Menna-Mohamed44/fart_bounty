@@ -5,45 +5,57 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from './context/AuthContext'
 import { AuthModal } from './components/AuthForms/AuthModal'
 import styles from './LandingPage.module.css'
-import { Medal, Trophy, Users, Sparkles, ShieldCheck, Mail, MessageCircle, Brain } from 'lucide-react'
+import { Medal, Trophy, Users, Sparkles, ShieldCheck, Mail, MessageCircle, Brain, Menu, X } from 'lucide-react'
 
 export default function LandingPage() {
-  const { session } = useAuth()
+  const { session, loading: authLoading } = useAuth()
   const router = useRouter()
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [authModalMode, setAuthModalMode] = useState<'signin' | 'signup'>('signin')
-  const [isRedirecting, setIsRedirecting] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  // Redirect authenticated users to home page
-  // BUT: Skip redirect if this is a new signup (AuthModal handles that)
   useEffect(() => {
-    console.log('🔍 Landing page useEffect - session:', !!session)
-    
-    if (session) {
-      // Check if this is a new signup
-      const isNewSignup = sessionStorage.getItem('is_new_signup')
-      console.log('📝 is_new_signup flag:', isNewSignup)
-      
-      if (isNewSignup === 'true') {
-        // Clear the flag - AuthModal will handle the redirect to /welcome
-        console.log('🟢 New signup detected - NOT redirecting to home')
-        sessionStorage.removeItem('is_new_signup')
-      } else {
-        // Regular signin - redirect to home
-        console.log('🔵 Existing user - redirecting to /home')
-        router.push('/home')
-      }
+    if (!mobileMenuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false)
     }
-  }, [session, router])
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [mobileMenuOpen])
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const mq = window.matchMedia('(max-width: 768px)')
+    if (!mq.matches) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [mobileMenuOpen])
+
+  const closeMobileMenu = () => setMobileMenuOpen(false)
+
+  // Redirect authenticated users to home — wait until auth has finished hydrating
+  // so a brief `session: false` during load is not treated as "signed out".
+  useEffect(() => {
+    if (authLoading) return
+    if (!session) return
+
+    const isNewSignup = sessionStorage.getItem('is_new_signup')
+    if (isNewSignup === 'true') {
+      sessionStorage.removeItem('is_new_signup')
+    } else {
+      router.push('/home')
+    }
+  }, [session, authLoading, router])
 
   const openSignInModal = () => {
-    console.log('🔵 openSignInModal clicked')
     setAuthModalMode('signin')
     setIsAuthModalOpen(true)
   }
 
   const openSignUpModal = () => {
-    console.log('🟢 openSignUpModal clicked')
     setAuthModalMode('signup')
     setIsAuthModalOpen(true)
   }
@@ -52,15 +64,57 @@ export default function LandingPage() {
     <>
     <div className={styles.page}>
       <header className={styles.navbar}>
+        {mobileMenuOpen && (
+          <div
+            className={styles.navBackdrop}
+            aria-hidden="true"
+            onClick={closeMobileMenu}
+          />
+        )}
         <div className={styles.navInner}>
-          <div className={styles.navBrand} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <div
+            className={styles.navBrand}
+            onClick={() => {
+              closeMobileMenu()
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          >
             Fart Bounty
           </div>
-          <nav className={styles.navLinks} aria-label="Primary">
-            <a href="#features" className={styles.navLink}>Features</a>
-            <a href="#about" className={styles.navLink}>About</a>
-            <a href="#contact" className={styles.navLink}>Contact</a>
-            <button className={styles.navSignIn} onClick={openSignInModal}>Sign In</button>
+          <button
+            type="button"
+            className={styles.navToggle}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="landing-primary-nav"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            onClick={() => setMobileMenuOpen((o) => !o)}
+          >
+            {mobileMenuOpen ? <X size={26} strokeWidth={2.25} /> : <Menu size={26} strokeWidth={2.25} />}
+          </button>
+          <nav
+            id="landing-primary-nav"
+            className={`${styles.navLinks} ${mobileMenuOpen ? styles.navLinksOpen : ''}`}
+            aria-label="Primary"
+          >
+            <a href="#features" className={styles.navLink} onClick={closeMobileMenu}>
+              Features
+            </a>
+            <a href="#about" className={styles.navLink} onClick={closeMobileMenu}>
+              About
+            </a>
+            <a href="#contact" className={styles.navLink} onClick={closeMobileMenu}>
+              Contact
+            </a>
+            <button
+              type="button"
+              className={styles.navSignIn}
+              onClick={() => {
+                closeMobileMenu()
+                openSignInModal()
+              }}
+            >
+              Sign In
+            </button>
           </nav>
         </div>
       </header>

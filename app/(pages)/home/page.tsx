@@ -33,6 +33,7 @@ import {
   Video
 } from 'lucide-react'
 import styles from './home.module.css'
+import HomeFeedWidgets from '@/app/components/HomeFeedWidgets/HomeFeedWidgets'
 import { checkProfanity, getFlagReason, shouldAutoBlock, getContentWarning } from '@/app/lib/profanityFilter'
 import dynamic from 'next/dynamic'
 const ShortsPlayer = dynamic(() => import('@/app/components/ShortsPlayer/ShortsPlayer'), { ssr: false })
@@ -1397,11 +1398,14 @@ function HomePage() {
             <div className={styles.composerActions}>
               <div className={styles.soundSelector}>
                 <button
+                  type="button"
                   className={styles.soundSelectorButton}
                   onClick={() => setShowSoundSelector(!showSoundSelector)}
                 >
                   <Music size={18} />
-                  {selectedSound ? `Sound Selected (${formatDuration(selectedSound.duration_seconds)})` : 'Attach Sound'}
+                  {selectedSound
+                    ? `Sound Selected (${formatDuration(selectedSound.duration_seconds)})`
+                    : 'Attach Sound'}
                 </button>
                 {showSoundSelector && (
                   <div className={styles.soundSelectorDropdown}>
@@ -1504,6 +1508,7 @@ function HomePage() {
                 style={{ display: 'none' }}
               />
               <button
+                type="button"
                 className={styles.soundSelectorButton}
                 onClick={() => shortVideoInputRef.current?.click()}
               >
@@ -1547,6 +1552,8 @@ function HomePage() {
           </div>
         </div>
       </div>
+
+      <HomeFeedWidgets />
 
       {/* Feed */}
       <div className={styles.feed}>

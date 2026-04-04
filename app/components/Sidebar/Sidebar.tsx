@@ -1,8 +1,10 @@
 'use client'
 
+import type { MouseEvent } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
+import { useMobileShell } from '@/app/context/MobileShellContext'
 import { useAuth } from '@/app/context/AuthContext'
 import { useCurrency } from '@/app/context/CurrencyContext'
 import { useNotifications } from '@/app/context/NotificationsContext'
@@ -36,6 +38,7 @@ import {
 import styles from './Sidebar.module.css'
 
 export default function Sidebar() {
+  const { navOpen, closeNav } = useMobileShell()
   const { user, signOut } = useAuth()
   const { fbCoins, fbGold, loading: coinsLoading } = useCurrency()
   const { unreadCount } = useNotifications()
@@ -64,8 +67,20 @@ export default function Sidebar() {
     }
   }
 
+  const handleAsideClick = (e: MouseEvent<HTMLElement>) => {
+    const t = e.target as HTMLElement
+    if (t.closest('a[href]') || t.closest('button')) {
+      closeNav()
+    }
+  }
+
   return (
-    <aside className={styles.sidebar}>
+    <aside
+      className={`${styles.sidebar} ${navOpen ? styles.sidebarDrawerOpen : ''}`}
+      onClick={handleAsideClick}
+    >
+      <div className={styles.sidebarFog} aria-hidden />
+      <div className={styles.sidebarScroll}>
       {/* Logo */}
       <div className={styles.logo}>
         <h1>Fart Bounty</h1>
@@ -204,24 +219,26 @@ export default function Sidebar() {
             <Library size={20} />
             <span>Media Library</span>
           </Link>
-
-          <Link
-            href="/groups"
-            className={`${styles.navLink} ${isActive('/groups') ? styles.active : ''}`}
-          >
-            <Users size={20} />
-            <span>Fart Groups</span>
-          </Link>
-
-          <Link
-            href="/news"
-            className={`${styles.navLink} ${isActive('/news') ? styles.active : ''}`}
-          >
-            <Newspaper size={20} />
-            <span>Fart News</span>
-          </Link>
-
         </div>
+
+        <div className={styles.sidebarLowerFog}>
+          <div className={styles.navSection}>
+            <Link
+              href="/groups"
+              className={`${styles.navLink} ${isActive('/groups') ? styles.active : ''}`}
+            >
+              <Users size={20} />
+              <span>Fart Groups</span>
+            </Link>
+
+            <Link
+              href="/news"
+              className={`${styles.navLink} ${isActive('/news') ? styles.active : ''}`}
+            >
+              <Newspaper size={20} />
+              <span>Fart News</span>
+            </Link>
+          </div>
 
         {/* STAFF Section - visible to anyone with a role (level 1+) */}
         {roleLevel >= 1 && (
@@ -315,36 +332,38 @@ export default function Sidebar() {
             <span>Help</span>
           </Link>
         </div>
+
+        {/* Premium Button - links to settings */}
+        <div className={styles.premiumSection}>
+          {premiumTier !== 'free' ? (
+            <Link href="/settings" className={styles.premiumCurrentTier}>
+              <Crown size={16} />
+              <span>{TIER_CONFIGS[premiumTier].name}</span>
+            </Link>
+          ) : (
+            <Link href="/settings" className={styles.premiumButton}>
+              <Sparkles size={16} />
+              <span>Become Premium</span>
+            </Link>
+          )}
+        </div>
+
+        {/* Marketplace Button */}
+        <div className={styles.marketplace}>
+          <Link href="/shop" className={styles.marketplaceButton}>
+            MARKETPLACE
+          </Link>
+        </div>
+
+        {/* Sign Out Button */}
+        <div className={styles.signOutSection}>
+          <button onClick={handleSignOut} className={styles.signOutButton}>
+            <LogOut size={18} />
+            <span>Sign Out</span>
+          </button>
+        </div>
+        </div>
       </nav>
-
-      {/* Premium Button - links to settings */}
-      <div className={styles.premiumSection}>
-        {premiumTier !== 'free' ? (
-          <Link href="/settings" className={styles.premiumCurrentTier}>
-            <Crown size={16} />
-            <span>{TIER_CONFIGS[premiumTier].name}</span>
-          </Link>
-        ) : (
-          <Link href="/settings" className={styles.premiumButton}>
-            <Sparkles size={16} />
-            <span>Become Premium</span>
-          </Link>
-        )}
-      </div>
-
-      {/* Marketplace Button */}
-      <div className={styles.marketplace}>
-        <Link href="/shop" className={styles.marketplaceButton}>
-          MARKETPLACE
-        </Link>
-      </div>
-
-      {/* Sign Out Button */}
-      <div className={styles.signOutSection}>
-        <button onClick={handleSignOut} className={styles.signOutButton}>
-          <LogOut size={18} />
-          <span>Sign Out</span>
-        </button>
       </div>
 
     </aside>

@@ -61,5 +61,7 @@
   .main {
     left: 0;
     right: 0;
+    top: 66px;
+    padding-top: 0.35rem;
   }
 }

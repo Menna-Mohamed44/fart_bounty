@@ -113,11 +113,13 @@ function NotificationsPage() {
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.headerContent}>
-            <Bell size={32} className={styles.headerIcon} />
-            <div>
+            <div className={styles.headerTitleRow}>
+              <Bell size={32} className={styles.headerIcon} aria-hidden />
               <h1>Notifications</h1>
-              <p>Stay updated with your battles, posts, and interactions</p>
             </div>
+            <p className={styles.headerSubtitle}>
+              Stay updated with your battles, posts, and interactions
+            </p>
           </div>
 
           <div className={styles.headerActions}>

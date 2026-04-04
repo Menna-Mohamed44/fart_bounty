@@ -1,4 +1,10 @@
 /* Right Sidebar Container */
+@media (max-width: 768px) {
+  .rightSidebar {
+    display: none !important;
+  }
+}
+
 .rightSidebar {
   width: 320px;
   height: 100vh;

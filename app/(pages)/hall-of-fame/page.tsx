@@ -194,9 +194,48 @@ function HallOfFamePage() {
 
   return (
     <div className={styles.container}>
-      {/* Header Section */}
+      {/* Date selector — top right of Hall of Fame */}
+      <div className={styles.hallTopBar}>
+        <div className={styles.monthSelector}>
+          <button
+            className={styles.monthButton}
+            onClick={() => setShowMonthPicker(!showMonthPicker)}
+          >
+            <span>{months[selectedMonth]} {selectedYear}</span>
+            <ChevronDown size={16} />
+          </button>
+          {showMonthPicker && (
+            <div className={styles.monthDropdown}>
+              <div className={styles.yearControls}>
+                <button onClick={() => setSelectedYear(selectedYear - 1)}>
+                  <ChevronLeft size={16} />
+                </button>
+                <span>{selectedYear}</span>
+                <button onClick={() => setSelectedYear(selectedYear + 1)}>
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+              <div className={styles.monthGrid}>
+                {months.map((month, index) => (
+                  <button
+                    key={month}
+                    className={selectedMonth === index ? styles.active : ''}
+                    onClick={() => {
+                      setSelectedMonth(index)
+                      setShowMonthPicker(false)
+                    }}
+                  >
+                    {month.slice(0, 3)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Logo + podiums */}
       <div className={styles.topSection}>
-        {/* Large Logo on the left */}
         <div className={styles.logoSection}>
           <Image
             src="/transparent_hall.png"
@@ -207,47 +246,7 @@ function HallOfFamePage() {
           />
         </div>
 
-        {/* Right Side: Month Selector at top, Podiums below */}
         <div className={styles.rightSection}>
-          {/* Month Selector at top right */}
-          <div className={styles.monthSelector}>
-            <button
-              className={styles.monthButton}
-              onClick={() => setShowMonthPicker(!showMonthPicker)}
-            >
-              <span>{months[selectedMonth]} {selectedYear}</span>
-              <ChevronDown size={16} />
-            </button>
-            {showMonthPicker && (
-              <div className={styles.monthDropdown}>
-                <div className={styles.yearControls}>
-                  <button onClick={() => setSelectedYear(selectedYear - 1)}>
-                    <ChevronLeft size={16} />
-                  </button>
-                  <span>{selectedYear}</span>
-                  <button onClick={() => setSelectedYear(selectedYear + 1)}>
-                    <ChevronRight size={16} />
-                  </button>
-                </div>
-                <div className={styles.monthGrid}>
-                  {months.map((month, index) => (
-                    <button
-                      key={month}
-                      className={selectedMonth === index ? styles.active : ''}
-                      onClick={() => {
-                        setSelectedMonth(index)
-                        setShowMonthPicker(false)
-                      }}
-                    >
-                      {month.slice(0, 3)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Podiums below month selector */}
           <div className={styles.podiumSection}>
             <div className={styles.podiumContainer}>
               <Image
@@ -262,9 +261,9 @@ function HallOfFamePage() {
               <div className={styles.podiumUsers}>
                 {topThree.map((user, index) => {
                   const positions = [
-                    { left: '50%', top: '5%' },   // 1st place - center
-                    { left: '20%', top: '13%' },  // 2nd place - left (raised)
-                    { left: '80%', top: '10%' }   // 3rd place - right (raised)
+                    { left: '50%', top: '8.5%' }, // 1st gold — slightly lower toward podium
+                    { left: '20%', top: '13%' }, // 2nd silver — unchanged
+                    { left: '79%', top: '14%' } // 3rd bronze — nudged right + down on podium
                   ]
                   return (
                     <div
@@ -323,14 +322,14 @@ function HallOfFamePage() {
                   <Image
                     src={user.avatar_url || '/profile.jpg'}
                     alt={user.username}
-                    width={40}
-                    height={40}
+                    width={22}
+                    height={22}
                   />
                 </div>
                 <div className={styles.userCardInfo}>
                   <div className={styles.userCardName}>{user.username}</div>
                   <div className={styles.userCardGold}>
-                    <Award size={12} />
+                    <Award size={9} />
                     <span>{user.fb_gold.toLocaleString()}</span>
                   </div>
                 </div>
@@ -366,14 +365,14 @@ function HallOfFamePage() {
                   <Image
                     src={user.avatar_url || '/profile.jpg'}
                     alt={user.username}
-                    width={40}
-                    height={40}
+                    width={22}
+                    height={22}
                   />
                 </div>
                 <div className={styles.userCardInfo}>
                   <div className={styles.userCardName}>{user.username}</div>
                   <div className={styles.userCardGold}>
-                    <Award size={12} />
+                    <Award size={9} />
                     <span>{user.fb_gold.toLocaleString()}</span>
                   </div>
                 </div>
@@ -421,7 +420,7 @@ function HallOfFamePage() {
                     <div className={styles.mediaAuthor}>by @{conf.user.username}</div>
                     <div className={styles.mediaStats}>
                       <div className={styles.mediaGold}>
-                        <Award size={14} />
+                        <Award size={10} />
                         <span>{conf.gold_earned || 0} Gold</span>
                       </div>
                     </div>
@@ -455,7 +454,7 @@ function HallOfFamePage() {
                     <div className={styles.mediaAuthor}>by @{sound.user?.username || 'Unknown'}</div>
                     <div className={styles.mediaStats}>
                       <div className={styles.mediaGold}>
-                        <Award size={14} />
+                        <Award size={10} />
                         <span>{sound.gold_earned || 0} Gold</span>
                       </div>
                     </div>

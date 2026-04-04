@@ -40,11 +40,11 @@ interface GreetingEntry {
 }
 
 const TABS: { id: AssetTab; label: string; icon: React.ReactNode }[] = [
-  { id: 'awards', label: 'Awards', icon: <Trophy size={18} /> },
-  { id: 'currency', label: 'Currency', icon: <Coins size={18} /> },
-  { id: 'subscription', label: 'Subscription', icon: <CreditCard size={18} /> },
-  { id: 'greetings', label: 'Greetings', icon: <Gift size={18} /> },
-  { id: 'items', label: 'Items', icon: <Package size={18} /> },
+  { id: 'awards', label: 'Awards', icon: <Trophy size={20} /> },
+  { id: 'currency', label: 'Currency', icon: <Coins size={20} /> },
+  { id: 'subscription', label: 'Subscription', icon: <CreditCard size={20} /> },
+  { id: 'greetings', label: 'Greetings', icon: <Gift size={20} /> },
+  { id: 'items', label: 'Items', icon: <Package size={20} /> },
 ]
 
 function AssetsPage() {

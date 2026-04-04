@@ -132,9 +132,10 @@ function FartLegendsPage() {
                 <Image
                   src={profile.avatar_url}
                   alt={profile.username}
-                  width={200}
-                  height={200}
+                  fill
+                  sizes="(max-width: 480px) 18vw, (max-width: 768px) 22vw, 120px"
                   className={styles.avatarImage}
+                  unoptimized
                 />
               </div>
             )}

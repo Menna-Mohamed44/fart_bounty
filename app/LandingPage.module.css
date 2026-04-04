@@ -670,6 +670,31 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.navToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  background: rgba(11, 218, 81, 0.08);
+  border: 1px solid rgba(109, 255, 177, 0.35);
+  border-radius: 10px;
+  color: #c2ffd8;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.navToggle:hover {
+  background: rgba(11, 218, 81, 0.15);
+  border-color: rgba(109, 255, 177, 0.55);
+  color: #e6fff2;
+}
+
+.navBackdrop {
+  display: none;
 }
 
 .navBrand {
@@ -732,9 +757,72 @@
 
 .navSignIn:active { transform: translateY(0); }
 
-@media (max-width: 640px) {
-  .navBrand { font-size: 1.2rem; }
-  .navLinks { gap: 1rem; }
-  .navLink { font-size: 0.9rem; }
-  .navSignIn { padding: 0.45rem 0.8rem; }
+@media (max-width: 768px) {
+  .navBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  .navToggle {
+    display: flex;
+  }
+
+  .navLinks {
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.35rem 0.75rem 1rem;
+    background: rgba(8, 18, 12, 0.98);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    border: 1px solid rgba(109, 255, 177, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+
+  .navLinksOpen {
+    display: flex;
+  }
+
+  .navLink {
+    padding: 0.85rem 0.65rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .navLink:last-of-type {
+    border-bottom: none;
+  }
+
+  .navLink::after {
+    display: none;
+  }
+
+  .navSignIn {
+    margin-top: 0.65rem;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    box-sizing: border-box;
+  }
+
+  .navBrand {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navBrand {
+    font-size: 1.1rem;
+  }
 }

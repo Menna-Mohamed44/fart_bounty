@@ -5,6 +5,24 @@
   padding: 0.5rem 1rem 2rem;
 }
 
+/* Month/year — full-width row, flush top right */
+.hallTopBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 0.25rem 0.15rem;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 6;
+}
+
+.hallTopBar .monthSelector {
+  top: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* Top Section with Logo and Right Side (Month Selector + Podiums) */
 .topSection {
   display: flex;
@@ -32,25 +50,23 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
 }
 
 .monthSelector {
   display: flex;
   justify-content: flex-end;
   position: relative;
-  top: 0.5rem;
-  margin-left: auto;
-  margin-right: -1.25rem;
+  flex-shrink: 0;
 }
 
 .monthButton {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
-  min-width: 140px;
-  padding: 0.55rem 0.75rem;
+  gap: 0.4rem;
+  min-width: 128px;
+  padding: 0.42rem 0.65rem;
   background: rgba(13, 34, 28, 0.65);
   border: none;
   border-radius: 999px;
@@ -263,8 +279,8 @@
 .mediaGrid3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  padding: 0 0.5rem;
+  gap: 0.38rem;
+  padding: 0 0.3rem;
 }
 
 .mediaGrid3 > :first-child {
@@ -273,11 +289,12 @@
 
 .mediaGridItem {
   display: flex;
-  gap: 0.75rem;
-  padding: 0.75rem;
+  gap: 0.3rem;
+  padding: 0.28rem 0.38rem;
+  min-height: 0;
   background: rgba(11, 218, 81, 0.01);
   border: 1px solid rgba(11, 218, 81, 0.2);
-  border-radius: 1rem;
+  border-radius: 0.55rem;
   transition: all 0.2s;
 }
 
@@ -287,12 +304,14 @@
 }
 
 .cardHeader {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
+  column-gap: 0.3rem;
+  margin-top: 0.45rem;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.25rem;
-  padding-left: 1rem;
+  padding: 0.35rem 0.9rem 0.25rem;
+  box-sizing: border-box;
 }
 
 .cardHeader h3 {
@@ -329,8 +348,8 @@
 .moreButton {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.5rem 1rem;
+  gap: 0.2rem;
+  padding: 0.35rem 0.55rem;
   background: transparent;
   border: none;
   border-radius: 0.375rem;
@@ -361,19 +380,20 @@
 .userGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  padding-right: 1.5rem;
-  padding-left: 0.75rem;
+  gap: 0.38rem;
+  padding-right: 0.85rem;
+  padding-left: 0.45rem;
 }
 
 .userCard {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
+  gap: 0.32rem;
+  padding: 0.26rem 0.38rem;
+  min-height: 0;
   background: rgba(11, 218, 81, 0.01);
   border: 1px solid rgba(11, 218, 81, 0.2);
-  border-radius: 1rem;
+  border-radius: 0.55rem;
   transition: all 0.2s;
 }
 
@@ -383,8 +403,8 @@
 }
 
 .userCardAvatar {
-  width: 40px;
-  height: 40px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -402,21 +422,22 @@
 }
 
 .userCardName {
-  font-size: 0.875rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.15;
 }
 
 .userCardGold {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.75rem;
+  gap: 0.15rem;
+  font-size: 0.62rem;
   color: #ffd700;
-  margin-top: 0.25rem;
+  margin-top: 0.05rem;
 }
 
 /* Info Banner */
@@ -452,22 +473,121 @@
   align-items: stretch;
 }
 
+/* Card chrome: extra left inset so titles + lists clear the decorative frame */
 .mainRow > .cardBordered,
 .mediaRow > .cardBordered {
   display: flex;
   flex-direction: column;
-  min-height: 320px;
+  min-height: 240px;
   width: 100%;
   box-sizing: border-box;
+  padding-left: 2.75rem;
 }
 
 .mediaRow > .cardBordered {
-  min-height: 320px;
+  min-height: 240px;
   height: 100%;
 }
 
 .mediaRow > .cardBordered .mediaGrid3 {
   flex: 1;
+}
+
+.mainRow > .cardBordered .cardHeader,
+.mediaRow > .cardBordered .cardHeader {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  padding-left: 0.65rem;
+  padding-right: 0.65rem;
+}
+
+/* Candidates / Legends — compact user tiles (scoped so it always wins over base .userCard) */
+.mainRow .cardBordered .userGrid {
+  gap: 0.26rem;
+  padding-left: 0.65rem;
+  padding-right: 0.35rem;
+  justify-items: start;
+  margin-top: -0.6rem;
+}
+
+.mainRow .cardBordered .userCard {
+  width: 100%;
+  max-width: 76%;
+  box-sizing: border-box;
+  padding: 0.18rem 0.3rem;
+  gap: 0.26rem;
+  border-radius: 0.42rem;
+}
+
+.mainRow .cardBordered .userCardAvatar {
+  width: 22px;
+  height: 22px;
+}
+
+.mainRow .cardBordered .userCardName {
+  font-size: 0.66rem;
+}
+
+.mainRow .cardBordered .userCardGold {
+  font-size: 0.56rem;
+  gap: 0.12rem;
+  margin-top: 0.02rem;
+}
+
+/* Videos / Audios — compact media tiles */
+.mediaRow .cardBordered .mediaGrid3 {
+  gap: 0.26rem;
+  padding: 0 0.35rem 1rem 0.65rem;
+  justify-items: start;
+  margin-top: -0.6rem;
+}
+
+.mediaRow .cardBordered .mediaGridItem {
+  width: 100%;
+  max-width: 80%;
+  box-sizing: border-box;
+  padding: 0.08rem 0.28rem;
+  gap: 0.16rem;
+  border-radius: 0.42rem;
+  align-items: center;
+}
+
+.mediaRow .cardBordered .mediaRank {
+  width: 16px;
+  height: 16px;
+  font-size: 0.48rem;
+}
+
+.mediaRow .cardBordered .mediaContent {
+  line-height: 1.05;
+}
+
+.mediaRow .cardBordered .mediaText {
+  font-size: 0.6rem !important;
+  line-height: 1.05 !important;
+  margin-bottom: 0.02rem !important;
+}
+
+.mediaRow .cardBordered .mediaAuthor {
+  font-size: 0.54rem;
+  line-height: 1.05;
+  margin-bottom: 0;
+}
+
+.mediaRow .cardBordered .mediaStats {
+  margin-top: 0;
+  gap: 0.2rem;
+}
+
+.mediaRow .cardBordered .mediaGold {
+  font-size: 0.54rem;
+  gap: 0.1rem;
+  line-height: 1;
+}
+
+.mediaRow .cardBordered .mediaGold svg {
+  width: 11px;
+  height: 11px;
 }
 
 .mediaList {
@@ -495,12 +615,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 22px;
+  height: 22px;
   background: #0bda51;
   color: #000;
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: 0.62rem;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -523,36 +643,38 @@
 }
 
 .mediaText {
-  margin: 0 0 0.5rem !important;
+  margin: 0 0 0.12rem !important;
   color: var(--text-primary);
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 1.2;
 }
 
 .mediaAuthor {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.12rem;
   color: var(--text-secondary);
-  font-size: 0.75rem;
+  font-size: 0.62rem;
   font-style: italic;
+  line-height: 1.15;
 }
 
 .mediaStats {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 0.25rem;
+  gap: 0.45rem;
+  margin-top: 0.05rem;
 }
 
 .mediaGold {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.22rem;
   color: #ffd700;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.68rem;
 }
 
 .mediaGold svg {
@@ -626,6 +748,135 @@
   margin-bottom: 1rem;
 }
 
+/* Desktop: larger decorative frame + card content (mobile breakpoints below stay unchanged) */
+@media (min-width: 769px) {
+  .container {
+    max-width: 1320px;
+  }
+
+  .mainRow,
+  .mediaRow {
+    gap: 1.85rem;
+  }
+
+  .cardBordered {
+    padding: 3.2rem 2.85rem 2.45rem;
+  }
+
+  .mainRow > .cardBordered,
+  .mediaRow > .cardBordered {
+    min-height: 300px;
+    padding-left: 3.35rem;
+  }
+
+  .mediaRow > .cardBordered {
+    min-height: 300px;
+  }
+
+  .cardHeader {
+    margin-bottom: 1.65rem;
+    padding: 0.48rem 1.05rem 0.32rem;
+  }
+
+  .cardHeader h3 {
+    font-size: 1.42rem;
+  }
+
+  .cardHeader .pink,
+  .cardHeader .blue {
+    font-size: 1.78rem;
+  }
+
+  .mainRow > .cardBordered .cardHeader,
+  .mediaRow > .cardBordered .cardHeader {
+    margin-bottom: 0.55rem;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .mainRow > .cardBordered .moreButton,
+  .mediaRow > .cardBordered .moreButton {
+    padding: 0.45rem 0.72rem;
+    font-size: 0.95rem;
+  }
+
+  .mainRow .cardBordered .userGrid {
+    gap: 0.42rem;
+    padding-left: 0.85rem;
+    padding-right: 0.5rem;
+    margin-top: -0.45rem;
+  }
+
+  .mainRow .cardBordered .userCard {
+    max-width: 90%;
+    padding: 0.32rem 0.52rem;
+    gap: 0.38rem;
+    border-radius: 0.55rem;
+  }
+
+  .mainRow .cardBordered .userCardAvatar {
+    width: 34px;
+    height: 34px;
+  }
+
+  .mainRow .cardBordered .userCardName {
+    font-size: 0.82rem;
+  }
+
+  .mainRow .cardBordered .userCardGold {
+    font-size: 0.7rem;
+    gap: 0.18rem;
+  }
+
+  .mainRow .cardBordered .userCardGold svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .mediaRow .cardBordered .mediaGrid3 {
+    gap: 0.42rem;
+    padding: 0 0.5rem 1.15rem 0.85rem;
+    margin-top: -0.45rem;
+  }
+
+  .mediaRow .cardBordered .mediaGridItem {
+    max-width: 92%;
+    padding: 0.2rem 0.42rem;
+    gap: 0.26rem;
+    border-radius: 0.55rem;
+  }
+
+  .mediaRow .cardBordered .mediaRank {
+    width: 22px;
+    height: 22px;
+    font-size: 0.58rem;
+  }
+
+  .mediaRow .cardBordered .mediaText {
+    font-size: 0.78rem !important;
+    line-height: 1.15 !important;
+    margin-bottom: 0.06rem !important;
+  }
+
+  .mediaRow .cardBordered .mediaAuthor {
+    font-size: 0.68rem;
+  }
+
+  .mediaRow .cardBordered .mediaStats {
+    gap: 0.28rem;
+  }
+
+  .mediaRow .cardBordered .mediaGold {
+    font-size: 0.68rem;
+    gap: 0.14rem;
+  }
+
+  .mediaRow .cardBordered .mediaGold svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
   .topSection {
@@ -693,21 +944,37 @@
     padding: 1rem 0.5rem;
   }
 
+  .hallTopBar {
+    padding: 0 0.15rem 0.25rem;
+  }
+
   .topSection {
     flex-direction: column;
     gap: 1rem;
+    align-items: stretch;
+  }
+
+  .logoSection {
+    justify-content: center;
   }
 
   .logo {
-    max-width: 150px;
+    max-width: 220px;
   }
 
-  .monthSelector {
+  .rightSection {
+    width: 100%;
+    gap: 0.35rem;
+  }
+
+  .podiumSection {
+    margin-top: 0;
     width: 100%;
   }
 
   .podiumContainer {
     max-width: 500px;
+    margin: 0 auto;
   }
 
   .podiumAvatar {
@@ -739,6 +1006,11 @@
     padding: 2rem 1.25rem 1.25rem;
   }
 
+  .mainRow > .cardBordered,
+  .mediaRow > .cardBordered {
+    padding-left: 1.65rem;
+  }
+
   .mediaGrid3 {
     grid-template-columns: 1fr;
   }
@@ -748,13 +1020,51 @@
   }
 
   .cardHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.25rem;
+    padding: 0.5rem 0.75rem 0.3rem;
+    margin-top: 0.55rem;
+    margin-bottom: 1rem;
+  }
+
+  .mainRow > .cardBordered .cardHeader,
+  .mediaRow > .cardBordered .cardHeader {
+    margin-top: 0.05rem;
+    margin-bottom: 0.3rem;
+    padding-left: 0.55rem;
+    padding-right: 0.5rem;
+  }
+
+  .mainRow .cardBordered .userGrid,
+  .mediaRow .cardBordered .mediaGrid3 {
+    margin-top: -0.55rem;
+  }
+
+  .mainRow .cardBordered .userGrid {
+    padding-left: 0.55rem;
+    padding-right: 0.3rem;
+  }
+
+  .mediaRow .cardBordered .mediaGrid3 {
+    padding: 0 0.3rem 0.85rem 0.55rem;
   }
 
   .cardHeader h3 {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    min-width: 0;
+    line-height: 1.2;
+  }
+
+  .cardHeader .pink,
+  .cardHeader .blue {
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+  }
+
+  .moreButton {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.35rem 0.5rem;
   }
 
   .userGrid {
@@ -773,7 +1083,7 @@
 
 @media (max-width: 480px) {
   .logo {
-    max-width: 120px;
+    max-width: 195px;
   }
 
   .podiumContainer {
@@ -796,21 +1106,26 @@
   }
 
   .cardHeader h3 {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
+  }
+
+  .cardHeader .pink,
+  .cardHeader .blue {
+    font-size: 0.95rem;
   }
 
   .moreButton {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.45rem;
   }
 
   .userCard {
-    padding: 0.6rem;
+    padding: 0.35rem 0.45rem;
   }
 
   .userCardAvatar {
-    width: 35px;
-    height: 35px;
+    width: 26px;
+    height: 26px;
   }
 
   .userCardName {
@@ -818,13 +1133,13 @@
   }
 
   .mediaItem {
-    padding: 0.75rem;
+    padding: 0.55rem 0.65rem;
   }
 
   .mediaRank {
-    width: 32px;
-    height: 32px;
-    font-size: 0.8rem;
+    width: 20px;
+    height: 20px;
+    font-size: 0.58rem;
   }
 }
 

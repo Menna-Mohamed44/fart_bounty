@@ -1026,12 +1026,64 @@
     font-size: 2rem;
   }
 
+  /* Keep same row layout as desktop; scale down to fit narrow widths */
   .radarSection {
-    padding: 1rem;
+    padding: 0.65rem 0.45rem;
   }
 
   .radarControls {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+
+  .leftKnobs,
+  .rightKnobs {
+    gap: 0.65rem;
+  }
+
+  .radarCenter {
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .diskContainer {
+    width: 170px;
+    height: 170px;
+  }
+
+  .knob {
+    gap: 0.3rem;
+  }
+
+  .knob span {
+    font-size: 0.7rem;
+  }
+
+  .knobCircle {
+    width: 50px;
+    height: 50px;
+    border-width: 2px;
+  }
+
+  .knobMarker {
+    height: 18px;
+    top: 5px;
+    transform-origin: center 20px;
+  }
+
+  .playBtn,
+  .stopBtn {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8rem;
+    gap: 0.35rem;
+  }
+
+  .playBtn svg,
+  .stopBtn svg {
+    width: 18px;
+    height: 18px;
   }
 
   .radarCircle {
@@ -1138,6 +1190,51 @@
 
   .stepNumber {
     align-self: center;
+  }
+
+  .radarSection {
+    padding: 0.5rem 0.35rem;
+  }
+
+  .radarControls {
+    gap: 0.25rem;
+  }
+
+  .leftKnobs,
+  .rightKnobs {
+    gap: 0.5rem;
+  }
+
+  .diskContainer {
+    width: 130px;
+    height: 130px;
+  }
+
+  .knobCircle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .knobMarker {
+    height: 16px;
+    top: 4px;
+    transform-origin: center 18px;
+  }
+
+  .knob span {
+    font-size: 0.65rem;
+  }
+
+  .playBtn,
+  .stopBtn {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .playBtn svg,
+  .stopBtn svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
