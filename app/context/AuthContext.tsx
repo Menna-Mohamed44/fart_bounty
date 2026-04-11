@@ -351,7 +351,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'https://fartbountyhtdfjy6.vercel.app/',
+          redirectTo: 'https://fartbountyhtdfjy6.vercel.app/home',
         },
       })
 
