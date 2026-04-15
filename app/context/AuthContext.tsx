@@ -347,13 +347,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         sessionStorage.setItem('post_auth_redirect', redirectTarget)
       }
 
-      const nextTarget = isSignup ? '/welcome' : '/home'
-      const redirectUrl = `${window.location.origin}/auth/callback?flow=${flowType}&next=${encodeURIComponent(nextTarget)}`
-
+      
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: redirectUrl,
+          redirectTo: 'https://fartbountyhtdfjy6.vercel.app/home',
         },
       })
 

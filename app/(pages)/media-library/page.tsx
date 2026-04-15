@@ -22,7 +22,7 @@ interface UserSound {
 interface AudioLibrarySound {
   id: string
   name: string
-  audio_url: string
+  storage_path: string
   category: string | null
   tags: string[] | null
   duration_seconds: number | null
@@ -140,97 +140,68 @@ function ShopPage() {
       return
     }
 
-    // Increment session so any in-flight async work from previous calls is abandoned
-    const session = ++playSessionRef.current
+    if (!storagePath) {
+      console.error('Storage path is null/undefined:', storagePath)
+      return
+    }
 
+    const session = ++playSessionRef.current
     setPlayingSound(soundId)
     playingSoundRef.current = soundId
-    try {
-      const { data: blobData, error: dlError } = await supabase.storage
-        .from(bucket)
-        .download(storagePath)
 
-      // Abort if user clicked pause/play another sound while downloading
+    const tryPlayUrl = (url: string, onFail: () => void) => {
       if (playSessionRef.current !== session) return
+      const audio = new Audio(url)
+      audio.volume = 1.0
+      currentAudioRef.current = audio
+      audio.onended = () => {
+        setPlayingSound(null)
+        playingSoundRef.current = null
+        currentAudioRef.current = null
+      }
+      audio.onerror = () => {
+        if (playSessionRef.current !== session) return
+        currentAudioRef.current = null
+        onFail()
+      }
+      audio.play().catch(() => {
+        if (playSessionRef.current !== session) return
+        currentAudioRef.current = null
+        onFail()
+      })
+    }
 
-      let rawBuffer: ArrayBuffer | null = null
+    // Step 1: Try public URL (instant, no download wait)
+    const { data: publicData } = supabase.storage.from(bucket).getPublicUrl(storagePath)
+    const publicUrl = publicData?.publicUrl
 
-      if (!dlError && blobData) {
-        rawBuffer = await blobData.arrayBuffer()
-      } else {
-        console.warn('Download failed, trying signed URL:', dlError?.message)
+    const trySignedUrl = async () => {
+      try {
         const { data: signedData, error: signedError } = await supabase.storage
           .from(bucket)
           .createSignedUrl(storagePath, 300)
-
-        if (signedError || !signedData?.signedUrl) {
-          throw new Error(signedError?.message || 'Could not get audio URL')
-        }
-        const resp = await fetch(signedData.signedUrl)
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
-        rawBuffer = await resp.arrayBuffer()
-      }
-
-      if (!rawBuffer || playSessionRef.current !== session) return
-
-      // Build ordered list of MIME types to try
-      const ext = storagePath.split('.').pop()?.toLowerCase() || ''
-      const allTypes = ['audio/wav', 'audio/webm', 'audio/mpeg', 'audio/ogg', 'audio/mp4']
-      const mimeMap: Record<string, string> = { mp3: 'audio/mpeg', wav: 'audio/wav', webm: 'audio/webm', ogg: 'audio/ogg', m4a: 'audio/mp4' }
-      const primary = mimeMap[ext] || 'audio/mpeg'
-      const mimeOrder = [primary, ...allTypes.filter(t => t !== primary)]
-
-      const playWithMime = (index: number) => {
-        // Abort if session changed (user paused or played something else)
+        if (signedError || !signedData?.signedUrl) throw new Error('Could not get signed URL')
         if (playSessionRef.current !== session) return
-
-        if (index >= mimeOrder.length) {
-          console.error('All MIME types failed for:', storagePath)
-          setPlayingSound(null)
-          playingSoundRef.current = null
-          return
-        }
-
-        const blob = new Blob([rawBuffer!], { type: mimeOrder[index] })
-        const url = URL.createObjectURL(blob)
-        const audio = new Audio(url)
-        audio.volume = 1.0
-        currentAudioRef.current = audio
-
-        audio.onended = () => {
-          setPlayingSound(null)
-          playingSoundRef.current = null
-          URL.revokeObjectURL(url)
-          currentAudioRef.current = null
-        }
-
-        audio.onerror = () => {
-          // Only retry if this is still the active session
-          if (playSessionRef.current !== session) {
-            URL.revokeObjectURL(url)
-            return
+        tryPlayUrl(signedData.signedUrl, () => {
+          console.error('All URL methods failed for:', storagePath)
+          if (playSessionRef.current === session) {
+            setPlayingSound(null)
+            playingSoundRef.current = null
           }
-          URL.revokeObjectURL(url)
-          playWithMime(index + 1)
-        }
-
-        audio.play().catch(() => {
-          if (playSessionRef.current !== session) {
-            URL.revokeObjectURL(url)
-            return
-          }
-          URL.revokeObjectURL(url)
-          playWithMime(index + 1)
         })
+      } catch (err) {
+        console.error('Failed to get signed URL:', err)
+        if (playSessionRef.current === session) {
+          setPlayingSound(null)
+          playingSoundRef.current = null
+        }
       }
+    }
 
-      playWithMime(0)
-    } catch (error) {
-      console.error('Failed to play sound:', error)
-      if (playSessionRef.current === session) {
-        setPlayingSound(null)
-        playingSoundRef.current = null
-      }
+    if (publicUrl) {
+      tryPlayUrl(publicUrl, trySignedUrl)
+    } else {
+      await trySignedUrl()
     }
   }
 
@@ -239,7 +210,11 @@ function ShopPage() {
   }
 
   const handlePlayPauseLibrary = async (sound: AudioLibrarySound) => {
-    await playFromBucket('audio-library', sound.audio_url, sound.id)
+    if (!sound.storage_path) {
+      console.error('No storage_path for library sound:', sound)
+      return
+    }
+    await playFromBucket('audio-library', sound.storage_path, sound.id)
   }
 
   const handleDownload = async (sound: UserSound) => {
@@ -278,15 +253,16 @@ function ShopPage() {
   }
 
   const handleDownloadLibrary = async (sound: AudioLibrarySound) => {
+    if (!sound.storage_path) return
     try {
       const { data: blobData, error } = await supabase.storage
         .from('audio-library')
-        .download(sound.audio_url)
+        .download(sound.storage_path)
 
       if (error || !blobData) {
         const { data: signedData, error: signedError } = await supabase.storage
           .from('audio-library')
-          .createSignedUrl(sound.audio_url, 300)
+          .createSignedUrl(sound.storage_path, 300)
 
         if (signedError || !signedData?.signedUrl) throw signedError
         const link = document.createElement('a')

@@ -758,6 +758,12 @@
 .navSignIn:active { transform: translateY(0); }
 
 @media (max-width: 768px) {
+  /* In-flow bar: scrolls with page (not sticky inside fixed main) */
+  .navbar {
+    position: relative;
+    top: auto;
+  }
+
   .navBackdrop {
     display: block;
     position: fixed;

@@ -1034,32 +1034,41 @@ export interface Database {
         Row: {
           id: string
           name: string
-          audio_url: string
+          storage_path: string
+          description: string | null
           category: string | null
           tags: string[] | null
           duration_seconds: number | null
+          file_size_bytes: number | null
           deleted: boolean
           created_at: string
+          updated_at: string
         }
         Insert: {
           id?: string
           name: string
-          audio_url: string
+          storage_path: string
+          description?: string | null
           category?: string | null
           tags?: string[] | null
           duration_seconds?: number | null
+          file_size_bytes?: number | null
           deleted?: boolean
           created_at?: string
+          updated_at?: string
         }
         Update: {
           id?: string
           name?: string
-          audio_url?: string
+          storage_path?: string
+          description?: string | null
           category?: string | null
           tags?: string[] | null
           duration_seconds?: number | null
+          file_size_bytes?: number | null
           deleted?: boolean
           created_at?: string
+          updated_at?: string
         }
         Relationships: []
       }

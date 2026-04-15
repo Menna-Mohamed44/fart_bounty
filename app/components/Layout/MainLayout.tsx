@@ -23,7 +23,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
     return (
       <div className={styles.container}>
         <main
-          className={`${styles.main} ${styles.noSidebar} ${styles.noRightSidebar}`}
+          className={`${styles.main} ${styles.noSidebar} ${styles.noRightSidebar} ${styles.landingMain}`}
         >
           {children}
         </main>
