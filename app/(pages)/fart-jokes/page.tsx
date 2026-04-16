@@ -389,7 +389,7 @@ function FartJokesPage() {
             <button className={styles.backBtn} onClick={() => router.back()} aria-label="Go back">
               <ChevronRight size={22} style={{ transform: 'rotate(180deg)' }} />
             </button>
-            <h1 className={styles.pageTitle}>{viewMode === 'swipe' ? 'Jokes Archive' : 'Fart Jokes'}</h1>
+            <h1 className={`${styles.pageTitle} ${viewMode === 'normal' ? styles.hideMobile : ''}`}>{viewMode === 'swipe' ? 'Jokes Archive' : 'Fart Jokes'}</h1>
           </div>
           <div className={styles.topRight}>
             {/* Toggle */}
