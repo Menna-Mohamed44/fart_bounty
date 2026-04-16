@@ -721,24 +721,24 @@
    ══════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   .container {
-    padding: 1rem 0.65rem 2.5rem;
+    padding: 1.5rem 1rem 3rem;
   }
   .topBar {
-    gap: 0.5rem;
+    gap: 0.6rem;
   }
   .pageTitle {
-    font-size: 1.1rem;
+    font-size: 1.7rem;
   }
   .topRight {
-    gap: 0.35rem;
+    gap: 0.45rem;
   }
   .toggleBtn {
-    padding: 0.3rem 0.55rem;
-    font-size: 0.72rem;
+    padding: 0.45rem 1rem;
+    font-size: 0.92rem;
   }
   .sortBtn {
-    padding: 0.3rem 0.5rem;
-    font-size: 0.72rem;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.92rem;
   }
   .addBtn {
     width: 30px;
@@ -747,41 +747,46 @@
 
   /* Cards */
   .card {
-    padding: 0.7rem 0.6rem 0.55rem;
+    padding: 1.1rem 0.9rem 0.85rem;
   }
-  .cardSetup { font-size: 0.82rem; }
-  .cardPunch { font-size: 0.8rem; }
+  .cardSetup { font-size: 1.05rem; }
+  .cardPunch { font-size: 1.2rem; }
+  .fireBtn, .dislikeBtn, .shareBtn { font-size: 0.9rem; }
 
   /* Archive */
   .archiveHero {
-    padding: 1.5rem 0.75rem;
+    padding: 1.4rem 1.1rem;
   }
-  .archiveHeroTitle { font-size: 1.35rem; }
-  .archiveHeroSub { font-size: 0.82rem; }
+  .archiveHeroTitle { font-size: 1.55rem; }
+  .archiveHeroSub { font-size: 0.98rem; }
+  .monthLabel { font-size: 1rem; }
+  .monthCount { font-size: 0.82rem; }
 
   /* Swipe card */
   .swipeCard {
-    padding: 1.2rem 1rem;
+    padding: 1.6rem 1.4rem 1.1rem;
+    min-height: 240px;
   }
-  .swipeSetup { font-size: 1rem; }
-  .swipePunch { font-size: 0.92rem; }
-  .swipeActions {
-    width: 100%;
-    max-width: 420px;
-    padding: 0 0.25rem;
-  }
+  .swipeSetup { font-size: 1.15rem; }
+  .swipePunch { font-size: 1.35rem; }
+  .swipeBigBtn { width: 68px; height: 68px; }
 
   /* Modals */
   .modal {
-    padding: 1.25rem 1rem;
-    border-radius: 14px;
+    padding: 1.75rem 1.4rem;
+    border-radius: 16px;
     max-width: 95vw;
   }
-  .modalTitle { font-size: 1.05rem; }
-  .choiceGrid { gap: 0.5rem; }
-  .choiceCard { padding: 1rem 0.5rem; }
-  .choiceLabel { font-size: 0.88rem; }
-  .choiceDesc { font-size: 0.7rem; }
+  .modalTitle { font-size: 1.35rem; }
+  .choiceGrid { gap: 0.75rem; }
+  .choiceCard { padding: 1.5rem 0.85rem; }
+  .choiceLabel { font-size: 1.05rem; }
+  .choiceDesc { font-size: 0.88rem; }
+  .fieldInput { font-size: 1rem; padding: 0.85rem 0.95rem; }
+  .publishBtn { font-size: 1rem; padding: 0.9rem; }
+  .generateBtn { font-size: 1rem; padding: 0.9rem; }
+  .shareJokeSetup { font-size: 0.98rem; }
+  .shareJokePunch { font-size: 1.05rem; }
 }
 
 /* ══════════════════════════════════════════════════
@@ -789,103 +794,101 @@
    ══════════════════════════════════════════════════ */
 @media (max-width: 480px) {
   .container {
-    padding: 0.75rem 0.5rem 2rem;
+    padding: 1.25rem 0.85rem 2.5rem;
   }
   .topBar {
     flex-wrap: nowrap;
   }
   .pageTitle {
-    font-size: 0.95rem;
+    font-size: 1.4rem;
     white-space: nowrap;
   }
   .topRight {
-    gap: 0.25rem;
+    gap: 0.35rem;
     flex-shrink: 0;
   }
   .toggleBtn {
-    padding: 0.28rem 0.45rem;
-    font-size: 0.68rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.86rem;
   }
   .sortBtn {
-    padding: 0.28rem 0.4rem;
-    font-size: 0.68rem;
-    gap: 0.15rem;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.86rem;
+    gap: 0.2rem;
   }
   .addBtn {
     width: 28px;
     height: 28px;
     flex-shrink: 0;
   }
-  .backBtn {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-  }
 
   /* Cards */
-  .cardUser { font-size: 0.68rem; }
-  .cardSetup { font-size: 0.8rem; }
-  .cardPunch { font-size: 0.78rem; }
-  .cardActions { gap: 0.35rem; }
+  .cardUser { font-size: 0.85rem; }
+  .cardSetup { font-size: 1rem; }
+  .cardPunch { font-size: 1.15rem; }
+  .cardActions { gap: 0.45rem; }
   .fireBtn, .dislikeBtn, .shareBtn {
-    padding: 0.18rem 0.3rem;
-    font-size: 0.68rem;
+    padding: 0.28rem 0.5rem;
+    font-size: 0.86rem;
   }
 
   /* Archive */
   .archiveHero {
-    padding: 1.25rem 0.5rem;
+    padding: 1.25rem 0.9rem;
   }
-  .archiveHeroTitle { font-size: 1.15rem; }
-  .archiveHeroSub { font-size: 0.78rem; }
+  .archiveHeroTitle { font-size: 1.35rem; }
+  .archiveHeroSub { font-size: 0.9rem; }
   .monthRow {
-    padding: 0.6rem 0.65rem;
+    padding: 0.85rem 0.9rem;
   }
-  .monthLabel { font-size: 0.84rem; }
-  .monthCount { font-size: 0.68rem; }
-  .monthArrow { width: 24px; height: 24px; }
+  .monthLabel { font-size: 0.96rem; }
+  .monthCount { font-size: 0.8rem; }
 
   /* Swipe */
   .swipeCard {
-    padding: 1rem 0.85rem;
-    min-height: 160px;
-    border-radius: 14px;
+    padding: 1.4rem 1.1rem 1rem;
+    min-height: 220px;
+    border-radius: 16px;
   }
-  .swipeSetup { font-size: 0.95rem; }
-  .swipePunch { font-size: 0.88rem; }
-  .swipeActionBtn { width: 38px; height: 38px; }
-  .swipeActions {
-    padding: 0;
-  }
+  .swipeTitleBack { font-size: 1.15rem; }
+  .swipeSetup { font-size: 1.08rem; }
+  .swipePunch { font-size: 1.3rem; }
+  .swipeBigBtn { width: 64px; height: 64px; }
+  .swipeShareBtn { font-size: 0.9rem; }
+  .swipeSkipHint { font-size: 0.82rem; }
 
   /* Modals */
   .overlay {
-    padding: 0.5rem;
+    padding: 0.75rem;
   }
   .modal {
-    padding: 1rem 0.85rem;
-    border-radius: 12px;
+    padding: 1.5rem 1.1rem;
+    border-radius: 14px;
     max-width: 100%;
   }
-  .modalTitle { font-size: 1rem; }
+  .modalTitle { font-size: 1.3rem; }
   .choiceGrid {
     grid-template-columns: 1fr 1fr;
-    gap: 0.4rem;
+    gap: 0.65rem;
   }
   .choiceCard {
-    padding: 0.85rem 0.4rem;
-    gap: 0.35rem;
+    padding: 1.35rem 0.7rem;
+    gap: 0.55rem;
   }
-  .choiceLabel { font-size: 0.82rem; }
-  .choiceDesc { font-size: 0.65rem; }
+  .choiceLabel { font-size: 1rem; }
+  .choiceDesc { font-size: 0.82rem; }
   .fieldInput {
-    padding: 0.55rem 0.6rem;
-    font-size: 0.82rem;
-    min-height: 52px;
+    padding: 0.82rem 0.88rem;
+    font-size: 1rem;
+    min-height: 68px;
   }
-  .publishBtn { font-size: 0.85rem; padding: 0.6rem; }
-  .generateBtn { font-size: 0.85rem; padding: 0.6rem; }
-  .aiField { font-size: 0.82rem; padding: 0.55rem 0.6rem; }
-  .aiResultSetup { font-size: 0.84rem; }
-  .aiResultPunch { font-size: 0.82rem; }
+  .fieldLabel { font-size: 0.82rem; }
+  .publishBtn { font-size: 1rem; padding: 0.85rem; }
+  .generateBtn { font-size: 1rem; padding: 0.85rem; }
+  .aiField { font-size: 1rem; padding: 0.82rem 0.88rem; }
+  .aiResultSetup { font-size: 1rem; }
+  .aiResultPunch { font-size: 1rem; }
+  .shareJokeSetup { font-size: 0.95rem; }
+  .shareJokePunch { font-size: 1rem; }
+  .sharePlatformLabel { font-size: 0.8rem; }
 }
