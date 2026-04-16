@@ -733,7 +733,7 @@
     display: none;
   }
   .pageTitle {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -821,7 +821,7 @@
     display: none;
   }
   .pageTitle {
-    font-size: 0.95rem;
+    font-size: 1.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
