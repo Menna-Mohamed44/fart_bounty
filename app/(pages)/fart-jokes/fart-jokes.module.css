@@ -305,6 +305,9 @@
   gap: 1rem;
   padding: 1rem 0;
 }
+.mobileArchiveBack {
+  display: none;
+}
 .swipeTitleBack {
   display: flex;
   align-items: center;
@@ -727,7 +730,13 @@
     gap: 0.6rem;
   }
   .pageTitle {
-    font-size: 1.7rem;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hideMobile {
+    display: none;
   }
   .topRight {
     gap: 0.45rem;
@@ -743,6 +752,12 @@
   .addBtn {
     width: 30px;
     height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+  }
+  .addBtn svg {
+    width: 20px;
+    height: 20px;
   }
 
   /* Cards */
@@ -800,8 +815,13 @@
     flex-wrap: nowrap;
   }
   .pageTitle {
-    font-size: 1.4rem;
+    font-size: 0.95rem;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hideMobile {
+    display: none;
   }
   .topRight {
     gap: 0.35rem;
@@ -819,7 +839,13 @@
   .addBtn {
     width: 28px;
     height: 28px;
+    min-width: 28px;
+    min-height: 28px;
     flex-shrink: 0;
+  }
+  .addBtn svg {
+    width: 18px;
+    height: 18px;
   }
 
   /* Cards */
