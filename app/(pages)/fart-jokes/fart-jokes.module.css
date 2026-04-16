@@ -729,6 +729,9 @@
   .topBar {
     gap: 0.6rem;
   }
+  .backBtn {
+    display: none;
+  }
   .pageTitle {
     font-size: 1.1rem;
     white-space: nowrap;
@@ -813,6 +816,9 @@
   }
   .topBar {
     flex-wrap: nowrap;
+  }
+  .backBtn {
+    display: none;
   }
   .pageTitle {
     font-size: 0.95rem;
