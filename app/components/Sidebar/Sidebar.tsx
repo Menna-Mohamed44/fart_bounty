@@ -33,7 +33,8 @@ import {
   HelpCircle,
   Users,
   Store,
-  Newspaper
+  Newspaper,
+  Laugh
 } from 'lucide-react'
 import styles from './Sidebar.module.css'
 
@@ -322,6 +323,14 @@ export default function Sidebar() {
           >
             <MessageSquare size={20} />
             <span>Confessional</span>
+          </Link>
+
+          <Link
+            href="/fart-jokes"
+            className={`${styles.navLink} ${isActive('/fart-jokes') ? styles.active : ''}`}
+          >
+            <Laugh size={20} />
+            <span>Fart Jokes</span>
           </Link>
 
           <Link

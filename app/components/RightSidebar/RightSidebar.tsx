@@ -63,13 +63,14 @@ export default function RightSidebar() {
 
   // Load initial data
   useEffect(() => {
-    loadSuggestedUsers()
     loadTrendingTopics()
     loadCurrentAd()
     if (user) {
-      loadFollowingStatus()
+      loadFollowingStatus() // this also calls loadSuggestedUsers with correct following data
+    } else {
+      loadSuggestedUsers()
     }
-  }, [user])
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Listen for follow state changes from profile pages
   useEffect(() => {
@@ -102,7 +103,7 @@ export default function RightSidebar() {
     return () => {
       window.removeEventListener('followStateChanged', handleFollowStateChange as EventListener)
     }
-  }, [user])
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Search with debounce
   useEffect(() => {
@@ -209,17 +210,22 @@ export default function RightSidebar() {
       const { data, error } = await query
 
       if (!error && data) {
-        // Filter out users we're already following
-        const usersWithFollowers = await Promise.all(
-          data.map(async (u: any) => {
-            const { count } = await (supabase as any)
-              .from('follows')
-              .select('*', { count: 'exact', head: true })
-              .eq('followee_id', u.id)
-            
-            return { ...u, followers_count: count || 0 }
-          })
-        )
+        // Batch-fetch follower counts in one query instead of N queries
+        const userIds = data.map((u: any) => u.id)
+        const { data: followRows } = await (supabase as any)
+          .from('follows')
+          .select('followee_id')
+          .in('followee_id', userIds)
+
+        const followCountMap: Record<string, number> = {}
+        for (const row of followRows || []) {
+          followCountMap[row.followee_id] = (followCountMap[row.followee_id] || 0) + 1
+        }
+
+        const usersWithFollowers = data.map((u: any) => ({
+          ...u,
+          followers_count: followCountMap[u.id] || 0,
+        }))
 
         const filteredUsers = usersWithFollowers.filter((user: SuggestedUser) => !excludedIds.has(user.id))
 
@@ -258,7 +264,7 @@ export default function RightSidebar() {
         .select('content')
         .eq('deleted', false)
         .order('created_at', { ascending: false })
-        .limit(200)
+        .limit(50)
 
       if (posts) {
         const hashtagCounts: { [key: string]: number } = {}

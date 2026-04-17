@@ -223,7 +223,7 @@ function HomePage() {
     if (user) {
       fetchUserSounds()
     }
-  }, [user])
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -280,7 +280,7 @@ function HomePage() {
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
-  }, [user])
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Reset and fetch first page when tab/sort/user/search changes
   useEffect(() => {
@@ -290,7 +290,7 @@ function HomePage() {
     setHasMore(true)
     setLoading(true)
     fetchPosts(0)
-  }, [activeTab, sortBy, user, searchQuery])
+  }, [activeTab, sortBy, user?.id, searchQuery]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Debounced search effect
   useEffect(() => {
@@ -390,25 +390,32 @@ function HomePage() {
         throw error
       }
 
-      // Fetch likes and comments counts
-      const postsWithCounts = await Promise.all(
-        (postsData || []).map(async (post: any) => {
-          const [likesRes, commentsRes, userLikeRes] = await Promise.all([
-            supabase.from('likes').select('*', { count: 'exact', head: true }).eq('post_id', post.id),
-            supabase.from('comments').select('*', { count: 'exact', head: true }).eq('post_id', post.id),
-            supabase.from('likes').select('*').eq('post_id', post.id).eq('user_id', user.id).maybeSingle()
-          ])
+      // Batch-fetch likes counts, comments counts, and user's likes in 3 queries (not 3 per post)
+      const postIds = (postsData || []).map((p: any) => p.id)
 
-          return {
-            ...post,
-            user: post.users,
-            sound: post.sounds,
-            likes_count: likesRes.count || 0,
-            comments_count: commentsRes.count || 0,
-            user_liked: !!userLikeRes.data
-          }
-        })
-      )
+      const [allLikesRes, allCommentsRes, userLikesRes] = await Promise.all([
+        supabase.from('likes').select('post_id').in('post_id', postIds),
+        supabase.from('comments').select('post_id').in('post_id', postIds),
+        supabase.from('likes').select('post_id').in('post_id', postIds).eq('user_id', user.id),
+      ])
+
+      // Build count maps
+      const likesMap: Record<string, number> = {}
+      const commentsMap: Record<string, number> = {}
+      const userLikedSet = new Set<string>()
+
+      for (const row of allLikesRes.data || []) { likesMap[row.post_id] = (likesMap[row.post_id] || 0) + 1 }
+      for (const row of allCommentsRes.data || []) { commentsMap[row.post_id] = (commentsMap[row.post_id] || 0) + 1 }
+      for (const row of userLikesRes.data || []) { userLikedSet.add(row.post_id) }
+
+      const postsWithCounts = (postsData || []).map((post: any) => ({
+        ...post,
+        user: post.users,
+        sound: post.sounds,
+        likes_count: likesMap[post.id] || 0,
+        comments_count: commentsMap[post.id] || 0,
+        user_liked: userLikedSet.has(post.id),
+      }))
 
       // Apply sorting for trending
       if (activeTab === 'trending') {

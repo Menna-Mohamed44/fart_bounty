@@ -123,17 +123,14 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  // Initial load
+  // Initial load + real-time subscription (single effect keyed on user ID)  
   useEffect(() => {
     refreshNotifications()
-  }, [user])
 
-  // Set up real-time subscription
-  useEffect(() => {
     if (!user) return
 
     const channel = supabase
-      .channel('notifications')
+      .channel(`notifications-${user.id}`)
       .on(
         'postgres_changes',
         {
@@ -142,8 +139,7 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
           table: 'notifications',
           filter: `user_id=eq.${user.id}`,
         },
-        (payload) => {
-          console.log('Notification change:', payload)
+        () => {
           refreshNotifications()
         }
       )
@@ -152,7 +148,7 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [user])
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const unreadCount = notifications.filter(n => !n.read).length
 

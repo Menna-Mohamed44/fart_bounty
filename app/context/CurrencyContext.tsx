@@ -31,6 +31,16 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       return
     }
 
+    // Read from user object first (already fetched by AuthContext with select('*'))
+    const userAny = user as any
+    if (userAny.fb_coins !== undefined || userAny.fb_gold !== undefined) {
+      setFbCoins(userAny.fb_coins || 0)
+      setFbGold(userAny.fb_gold || 0)
+      setLoading(false)
+      return
+    }
+
+    // Fallback: fetch from DB only if user object doesn't have the fields
     try {
       const { data, error } = await supabase
         .from('users')
@@ -118,7 +128,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     refreshBalance()
-  }, [user])
+  }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const value = {
     fbCoins,

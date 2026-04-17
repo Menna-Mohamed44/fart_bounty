@@ -74,6 +74,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       async (event: AuthChangeEvent, session: Session | null) => {
         if (!mounted) return
 
+        // Skip INITIAL_SESSION — already handled by getInitialSession above
+        if (event === 'INITIAL_SESSION') return
+
         setSession(session)
 
         if (session?.user) {
@@ -90,7 +93,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       mounted = false
       subscription.unsubscribe()
     }
-  }, [supabase.auth])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fetch user profile from database
   const fetchUserProfile = async (userId: string): Promise<void> => {

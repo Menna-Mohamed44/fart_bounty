@@ -1072,6 +1072,63 @@ export interface Database {
         }
         Relationships: []
       }
+      fart_jokes: {
+        Row: {
+          id: string
+          user_id: string
+          setup: string
+          punchline: string
+          fire_count: number
+          dislike_count: number
+          created_at: string
+          deleted: boolean
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          setup: string
+          punchline: string
+          fire_count?: number
+          dislike_count?: number
+          created_at?: string
+          deleted?: boolean
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          setup?: string
+          punchline?: string
+          fire_count?: number
+          dislike_count?: number
+          created_at?: string
+          deleted?: boolean
+        }
+        Relationships: []
+      }
+      fart_joke_reactions: {
+        Row: {
+          id: string
+          joke_id: string
+          user_id: string
+          reaction_type: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          joke_id: string
+          user_id: string
+          reaction_type: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          joke_id?: string
+          user_id?: string
+          reaction_type?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
       content_flags: {
         Row: {
           id: string
