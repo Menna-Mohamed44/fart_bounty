@@ -286,7 +286,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return { user: null, error }
       }
 
-      // User profile will be fetched automatically via the auth state listener
+      // Eagerly set session and fetch profile before returning
+      // so user state is populated before callers navigate
+      if (data.session) {
+        setSession(data.session)
+      }
+      if (data.user) {
+        await fetchUserProfile(data.user.id)
+      }
+
       return { user: user, error: null }
     } catch (error: any) {
       // Return a generic error without throwing
@@ -318,8 +326,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return { user: null, error }
       }
 
-      // User profile will be created automatically via the auth state listener
-      // Username and display name will be auto-generated in createUserProfile
+      // Eagerly set session and create profile before returning
+      if (data.session) {
+        setSession(data.session)
+      }
+      if (data.user) {
+        await fetchUserProfile(data.user.id)
+      }
+
       return { user: user, error: null }
     } catch (error: any) {
       // Return a generic error without throwing
@@ -385,7 +399,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return { error }
       }
 
-      // State will be cleared automatically via the auth state listener
+      // Clear state immediately so callers can navigate without stale data
+      setUser(null)
+      setSession(null)
+
       return { error: null }
     } catch (error: any) {
       // Return a generic error without throwing
