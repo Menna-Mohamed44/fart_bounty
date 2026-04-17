@@ -6,6 +6,8 @@ import { useAuth } from '@/app/context/AuthContext';
 import { createClient } from '@/app/lib/supabaseClient';
 import FartJump from './FartJump';
 import GasBlaster from './GasBlaster';
+import StinkySnake from './StinkySnake';
+import TootCatcher from './TootCatcher';
 
 interface Game {
   id: string;
@@ -38,6 +40,56 @@ const games: Game[] = [
     inlineComponent: GasBlaster,
   },
   {
+    id: 'stinky-snake',
+    name: 'Stinky Snake',
+    description: 'Eat beans, grow longer, and leave fart clouds behind! Golden beans give 5x points but vanish fast. How long can you survive?',
+    thumbnail: '',
+    url: '',
+    category: 'Arcade',
+    inlineComponent: StinkySnake,
+  },
+  {
+    id: 'toot-catcher',
+    name: 'Toot Catcher',
+    description: 'Catch falling beans, fart clouds, and peppers in your basket! Avoid bombs, build combos, and trigger Fever Mode for 2x points!',
+    thumbnail: '',
+    url: '',
+    category: 'Reflex',
+    inlineComponent: TootCatcher,
+  },
+  {
+    id: 'legend-of-fartacus',
+    name: 'The Legend of Fartacus',
+    description: 'A tight-controls platformer where you fart your way to victory! Features wall-jumps, secrets, and the F.A.R.T. dynamic SFX system. Easy to learn, hard to master.',
+    thumbnail: '',
+    url: 'https://html-classic.itch.zone/html/13358108/index.html',
+    category: 'Platformer',
+  },
+  {
+    id: 'jetprout-joyride',
+    name: 'JetProut Joyride',
+    description: 'A fart-powered jetpack runner! Dodge obstacles and fly through the sky propelled by powerful gas blasts in this action-packed side-scroller.',
+    thumbnail: '',
+    url: 'https://html-classic.itch.zone/html/13110717/index.html',
+    category: 'Action',
+  },
+  {
+    id: 'silent-but-deadly',
+    name: 'Silent but Deadly',
+    description: 'A stealth puzzle game — release your fart and guide it through smell zones to make targets leave. But be careful, your fart fades fast!',
+    thumbnail: '',
+    url: 'https://html-classic.itch.zone/html/12661600/index.html',
+    category: 'Stealth',
+  },
+  {
+    id: 'windows-pirst',
+    name: 'Windows Pirst',
+    description: 'Nothing is funny without farts! A hilarious fart-themed game with quirky humor and surprising gameplay twists.',
+    thumbnail: '',
+    url: 'https://html-classic.itch.zone/html/2638285/index.html',
+    category: 'Comedy',
+  },
+  {
     id: 'flappy-fart',
     name: 'Flappy Fart',
     description: 'Propel yourself through the sky with your fart',
@@ -50,6 +102,12 @@ const games: Game[] = [
 const GAME_EMOJIS: Record<string, string> = {
   'fart-jump': '💨',
   'gas-blaster': '💥',
+  'stinky-snake': '🐍',
+  'toot-catcher': '🧺',
+  'legend-of-fartacus': '⚔️',
+  'jetprout-joyride': '🚀',
+  'silent-but-deadly': '🤫',
+  'windows-pirst': '💩',
   'flappy-fart': 'F',
 };
 
