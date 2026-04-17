@@ -131,15 +131,13 @@ export default function Sidebar() {
 
       {/* Navigation */}
       <nav className={styles.nav}>
-        {/* HOME Section */}
         <div className={styles.navSection}>
-          <div className={styles.sectionLabel}>HOME</div>
           <Link
             href={user?.username ? `/home` : '/'}
-            className={`${styles.navLink} ${pathname?.includes(`/${user?.username}`) && !isActive(`/${user?.username}`) ? styles.active : ''}`}
+            className={`${styles.navLink} ${isActive('/home') ? styles.active : ''}`}
           >
             <Home size={20} />
-            <span>Latest</span>
+            <span>Home</span>
           </Link>
 
           {user?.username ? (
@@ -148,7 +146,7 @@ export default function Sidebar() {
               className={`${styles.navLink} ${isActive(`/${user.username}`) ? styles.active : ''}`}
             >
               <User size={20} />
-              <span>Profile</span>
+              <span>My Profile</span>
             </Link>
           ) : (
             <div 
@@ -156,17 +154,9 @@ export default function Sidebar() {
               title="Profile not available"
             >
               <User size={20} />
-              <span>Profile</span>
+              <span>My Profile</span>
             </div>
           )}
-
-          <Link
-            href="/stories"
-            className={`${styles.navLink} ${isActive('/stories') ? styles.active : ''}`}
-          >
-            <BookOpen size={20} />
-            <span>Stories</span>
-          </Link>
 
           <Link
             href="/notifications"
@@ -182,35 +172,11 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            href="/battles"
-            className={`${styles.navLink} ${isActive('/battles') ? styles.active : ''}`}
-          >
-            <Swords size={20} />
-            <span>Battles</span>
-          </Link>
-
-          <Link
-            href="/challenges"
-            className={`${styles.navLink} ${isActive('/challenges') ? styles.active : ''}`}
-          >
-            <Trophy size={20} />
-            <span>Challenges</span>
-          </Link>
-
-          <Link
-            href="/hall-of-fame"
-            className={`${styles.navLink} ${isActive('/hall-of-fame') ? styles.active : ''}`}
-          >
-            <Award size={20} />
-            <span>Hall of Fame</span>
-          </Link>
-
-          <Link
             href="/assets"
             className={`${styles.navLink} ${isActive('/assets') ? styles.active : ''}`}
           >
             <Package size={20} />
-            <span>Assets</span>
+            <span>My Assets</span>
           </Link>
 
           <Link
@@ -220,27 +186,113 @@ export default function Sidebar() {
             <Library size={20} />
             <span>Media Library</span>
           </Link>
+
+          <Link
+            href="/challenges"
+            className={`${styles.navLink} ${isActive('/challenges') ? styles.active : ''}`}
+          >
+            <Trophy size={20} />
+            <span>Fart Challenges</span>
+          </Link>
+
+          <Link
+            href="/confessional"
+            className={`${styles.navLink} ${isActive('/confessional') ? styles.active : ''}`}
+          >
+            <MessageSquare size={20} />
+            <span>The Fart Confessional</span>
+          </Link>
+
+          <Link
+            href="/generator"
+            className={`${styles.navLink} ${isActive('/generator') ? styles.active : ''}`}
+          >
+            <Zap size={20} />
+            <span>The Bounty Blaster</span>
+          </Link>
+
+          <Link
+            href="/news"
+            className={`${styles.navLink} ${isActive('/news') ? styles.active : ''}`}
+          >
+            <Newspaper size={20} />
+            <span>The Daily Fart</span>
+          </Link>
+
+          <Link
+            href="/battles"
+            className={`${styles.navLink} ${isActive('/battles') ? styles.active : ''}`}
+          >
+            <Swords size={20} />
+            <span>Fart Battles</span>
+          </Link>
+
+          <Link
+            href="/groups"
+            className={`${styles.navLink} ${isActive('/groups') ? styles.active : ''}`}
+          >
+            <Users size={20} />
+            <span>Fart Groups</span>
+          </Link>
+
+          <Link
+            href="/hall-of-fame"
+            className={`${styles.navLink} ${isActive('/hall-of-fame') ? styles.active : ''}`}
+          >
+            <Award size={20} />
+            <span>The Fart Hall of Fame</span>
+          </Link>
+
+          <Link
+            href="/fart-jokes"
+            className={`${styles.navLink} ${isActive('/fart-jokes') ? styles.active : ''}`}
+          >
+            <Laugh size={20} />
+            <span>Fart Jokes</span>
+          </Link>
+
+          <Link
+            href="/stories"
+            className={`${styles.navLink} ${isActive('/stories') ? styles.active : ''}`}
+          >
+            <BookOpen size={20} />
+            <span>Fart Stories</span>
+          </Link>
+
+          <Link
+            href="/games"
+            className={`${styles.navLink} ${isActive('/games') ? styles.active : ''}`}
+          >
+            <Gamepad2 size={20} />
+            <span>Fart Games</span>
+          </Link>
+
+          <Link
+            href="/shop"
+            className={`${styles.navLink} ${isActive('/shop') ? styles.active : ''}`}
+          >
+            <Store size={20} />
+            <span>Fart Bounty Store</span>
+          </Link>
+
+          <Link
+            href="/help"
+            className={`${styles.navLink} ${isActive('/help') ? styles.active : ''}`}
+          >
+            <HelpCircle size={20} />
+            <span>Help</span>
+          </Link>
+
+          <Link
+            href="/settings"
+            className={`${styles.navLink} ${isActive('/settings') ? styles.active : ''}`}
+          >
+            <Settings size={20} />
+            <span>Settings</span>
+          </Link>
         </div>
 
         <div className={styles.sidebarLowerFog}>
-          <div className={styles.navSection}>
-            <Link
-              href="/groups"
-              className={`${styles.navLink} ${isActive('/groups') ? styles.active : ''}`}
-            >
-              <Users size={20} />
-              <span>Fart Groups</span>
-            </Link>
-
-            <Link
-              href="/news"
-              className={`${styles.navLink} ${isActive('/news') ? styles.active : ''}`}
-            >
-              <Newspaper size={20} />
-              <span>Fart News</span>
-            </Link>
-          </div>
-
         {/* STAFF Section - visible to anyone with a role (level 1+) */}
         {roleLevel >= 1 && (
           <div className={styles.navSection}>
@@ -298,70 +350,27 @@ export default function Sidebar() {
           </div>
         )}
 
-        {/* FUN Section */}
-        <div className={styles.navSection}>
-          <div className={styles.sectionLabel}>FUN</div>
-          <Link
-            href="/games"
-            className={`${styles.navLink} ${isActive('/games') ? styles.active : ''}`}
-          >
-            <Gamepad2 size={20} />
-            <span>Games</span>
-          </Link>
-
-          <Link
-            href="/generator"
-            className={`${styles.navLink} ${isActive('/generator') ? styles.active : ''}`}
-          >
-            <Zap size={20} />
-            <span>Generator</span>
-          </Link>
-
-          <Link
-            href="/confessional"
-            className={`${styles.navLink} ${isActive('/confessional') ? styles.active : ''}`}
-          >
-            <MessageSquare size={20} />
-            <span>Confessional</span>
-          </Link>
-
-          <Link
-            href="/fart-jokes"
-            className={`${styles.navLink} ${isActive('/fart-jokes') ? styles.active : ''}`}
-          >
-            <Laugh size={20} />
-            <span>Fart Jokes</span>
-          </Link>
-
-          <Link
-            href="/help"
-            className={`${styles.navLink} ${isActive('/help') ? styles.active : ''}`}
-          >
-            <HelpCircle size={20} />
-            <span>Help</span>
-          </Link>
+        {/* Fart Store Ad Space */}
+        <div className={styles.adSpace}>
+          <div className={styles.adSpaceInner}>
+            <Store size={20} />
+            <span>Fart Store Ad Space</span>
+          </div>
         </div>
 
-        {/* Premium Button - links to settings */}
+        {/* FB Membership Button */}
         <div className={styles.premiumSection}>
           {premiumTier !== 'free' ? (
-            <Link href="/settings" className={styles.premiumCurrentTier}>
+            <Link href="/settings?tab=premium" className={styles.premiumCurrentTier}>
               <Crown size={16} />
-              <span>{TIER_CONFIGS[premiumTier].name}</span>
+              <span>FB Membership — {TIER_CONFIGS[premiumTier].name}</span>
             </Link>
           ) : (
-            <Link href="/settings" className={styles.premiumButton}>
-              <Sparkles size={16} />
-              <span>Become Premium</span>
+            <Link href="/settings?tab=premium" className={styles.premiumButton}>
+              <Crown size={16} />
+              <span>FB Membership</span>
             </Link>
           )}
-        </div>
-
-        {/* Marketplace Button */}
-        <div className={styles.marketplace}>
-          <Link href="/shop" className={styles.marketplaceButton}>
-            MARKETPLACE
-          </Link>
         </div>
 
         {/* Sign Out Button */}
