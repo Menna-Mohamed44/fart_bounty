@@ -169,6 +169,10 @@ function HomePage() {
   const audioRefs = useRef<Record<string, HTMLAudioElement>>({})
   const sentinelRef = useRef<HTMLDivElement | null>(null)
 
+  // Keep a ref to the latest user so async functions never see stale closures
+  const userRef = useRef(user)
+  useEffect(() => { userRef.current = user }, [user])
+
   const maxLength = maxPostLength
 
   // Cleanup on unmount
@@ -318,7 +322,8 @@ function HomePage() {
   }, [showPostedToast])
 
   const fetchPosts = async (pageToFetch: number) => {
-    if (!user) return
+    const currentUser = userRef.current
+    if (!currentUser) return
     // Shorts tab uses its own fetcher
     if (activeTab === 'shorts') {
       setLoading(false)
@@ -356,7 +361,7 @@ function HomePage() {
         const { data: followingData } = await supabase
           .from('follows')
           .select('followee_id')
-          .eq('follower_id', user.id)
+          .eq('follower_id', currentUser.id)
 
         const followingIds = followingData?.map(f => f.followee_id) || []
         if (followingIds.length === 0) {
@@ -396,7 +401,7 @@ function HomePage() {
       const [allLikesRes, allCommentsRes, userLikesRes] = await Promise.all([
         supabase.from('likes').select('post_id').in('post_id', postIds),
         supabase.from('comments').select('post_id').in('post_id', postIds),
-        supabase.from('likes').select('post_id').in('post_id', postIds).eq('user_id', user.id),
+        supabase.from('likes').select('post_id').in('post_id', postIds).eq('user_id', currentUser.id),
       ])
 
       // Build count maps
