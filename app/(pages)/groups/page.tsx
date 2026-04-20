@@ -177,6 +177,8 @@ function GroupsPage() {
   const [reportReason, setReportReason] = useState('inappropriate_content')
   const [reportDescription, setReportDescription] = useState('')
   const [submittingReport, setSubmittingReport] = useState(false)
+  const [collapsedComments, setCollapsedComments] = useState<Set<string>>(new Set())
+  const [visibleGroupComments, setVisibleGroupComments] = useState<Record<string, number>>({})
 
   // ─── Fetch groups ───
   const fetchGroups = useCallback(async () => {
@@ -799,6 +801,25 @@ function GroupsPage() {
     }
   }
 
+  const toggleCommentCollapse = (commentId: string) => {
+    setCollapsedComments(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(commentId)) {
+        newSet.delete(commentId)
+      } else {
+        newSet.add(commentId)
+      }
+      return newSet
+    })
+  }
+
+  const handleLoadMoreGroupComments = (discussionId: string) => {
+    setVisibleGroupComments(prev => ({
+      ...prev,
+      [discussionId]: (prev[discussionId] || 3) + 5
+    }))
+  }
+
   // ─── Toggle expand discussion (load comments) ───
   const toggleExpandDiscussion = async (discussionId: string) => {
     if (expandedDiscId === discussionId) {
@@ -1039,8 +1060,13 @@ function GroupsPage() {
                       {(commentsMap[d.id] || []).length === 0 ? (
                         <p className={styles.noComments}>No comments yet</p>
                       ) : (
-                        (commentsMap[d.id] || []).map(c => (
+                        (commentsMap[d.id] || []).slice(0, visibleGroupComments[d.id] || 3).map(c => {
+                          const isCCollapsed = collapsedComments.has(c.id)
+                          return (
                           <div key={c.id} className={styles.inlineComment}>
+                            <button className={styles.collapseBtn} onClick={() => toggleCommentCollapse(c.id)} title={isCCollapsed ? 'Expand' : 'Collapse'} type="button">
+                              {isCCollapsed ? '+' : '−'}
+                            </button>
                             <div className={styles.inlineCommentAvatar} onClick={() => router.push(`/${c.username}`)} style={{ cursor: 'pointer' }}>
                               {c.avatar_url ? <img src={c.avatar_url} alt={c.username} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} /> : c.initials}
                             </div>
@@ -1049,6 +1075,8 @@ function GroupsPage() {
                                 <span className={styles.inlineCommentUser} onClick={() => router.push(`/${c.username}`)} style={{ cursor: 'pointer' }}>{c.display_name || c.username}</span>
                                 <span className={styles.inlineCommentTime}>{timeAgo(c.created_at)}</span>
                               </div>
+                              {!isCCollapsed && (
+                              <>
                               <p className={styles.inlineCommentBody}>{c.body}</p>
                               <div className={styles.commentActions}>
                                 <button className={`${styles.commentLikeBtn} ${c.is_liked ? styles.commentLikeBtnActive : ''}`} onClick={() => toggleCommentLike(d.id, c.id, c.is_liked)}>
@@ -1077,8 +1105,13 @@ function GroupsPage() {
                               )}
                               {c.replies.length > 0 && (
                                 <div className={styles.repliesSection}>
-                                  {c.replies.map(r => (
+                                  {c.replies.map(r => {
+                                    const isRCollapsed = collapsedComments.has(r.id)
+                                    return (
                                     <div key={r.id} className={styles.inlineComment}>
+                                      <button className={styles.collapseBtn} onClick={() => toggleCommentCollapse(r.id)} title={isRCollapsed ? 'Expand' : 'Collapse'} type="button">
+                                        {isRCollapsed ? '+' : '−'}
+                                      </button>
                                       <div className={styles.inlineCommentAvatar} onClick={() => router.push(`/${r.username}`)} style={{ cursor: 'pointer' }}>
                                         {r.avatar_url ? <img src={r.avatar_url} alt={r.username} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} /> : r.initials}
                                       </div>
@@ -1088,6 +1121,8 @@ function GroupsPage() {
                                           {r.reply_to_username && <span className={styles.replyToLabel}>→ {r.reply_to_username}</span>}
                                           <span className={styles.inlineCommentTime}>{timeAgo(r.created_at)}</span>
                                         </div>
+                                        {!isRCollapsed && (
+                                        <>
                                         <p className={styles.inlineCommentBody}>{r.body}</p>
                                         <div className={styles.commentActions}>
                                           <button className={`${styles.commentLikeBtn} ${r.is_liked ? styles.commentLikeBtnActive : ''}`} onClick={() => toggleCommentLike(d.id, r.id, r.is_liked)}>
@@ -1114,14 +1149,23 @@ function GroupsPage() {
                                             </button>
                                           </div>
                                         )}
+                                        </>
+                                        )}
                                       </div>
                                     </div>
-                                  ))}
+                                  )})}
                                 </div>
+                              )}
+                              </>
                               )}
                             </div>
                           </div>
-                        ))
+                        )})
+                      )}
+                      {(commentsMap[d.id] || []).length > (visibleGroupComments[d.id] || 3) && (
+                        <button className={styles.loadMoreCommentsBtn} onClick={() => handleLoadMoreGroupComments(d.id)} type="button">
+                          Load {Math.min(5, (commentsMap[d.id] || []).length - (visibleGroupComments[d.id] || 3))} more comments
+                        </button>
                       )}
                       {isJoined && (
                         <div className={styles.addCommentRow}>
