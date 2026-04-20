@@ -56,12 +56,12 @@ export default function Sidebar() {
       
       if (error) {
         console.error('Error signing out:', error)
-        // Could show a toast notification here if needed
         alert('Failed to sign out. Please try again.')
         return
       }
       
-      router.push('/')
+      // Full page reload to cleanly reset all contexts and subscriptions
+      window.location.href = '/'
     } catch (error) {
       console.error('Error signing out:', error)
       alert('Failed to sign out. Please try again.')
