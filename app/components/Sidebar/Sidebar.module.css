@@ -375,10 +375,36 @@
   }
 }
 
-/* Premium — below nav (after Media Library, etc.) */
+/* Fart Store Ad Space */
+.adSpace {
+  padding: 0.5rem 0;
+}
+
+.adSpaceInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1.25rem 0.75rem;
+  background: linear-gradient(135deg, rgba(11, 218, 81, 0.06), rgba(11, 218, 81, 0.02));
+  border: 1px dashed rgba(11, 218, 81, 0.3);
+  border-radius: 0.5rem;
+  color: rgba(194, 255, 216, 0.5);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.adSpaceInner svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+}
+
+/* FB Membership */
 .premiumSection {
-  margin-top: auto;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 }
 
 .premiumButton {
@@ -442,33 +468,6 @@
 .premiumCurrentTier svg {
   width: 16px;
   height: 16px;
-}
-
-/* Marketplace Button */
-.marketplace {
-  padding-top: 0.5rem;
-}
-
-.marketplaceButton {
-  display: block;
-  width: 100%;
-  padding: 0.875rem;
-  background-color: var(--accent-primary);
-  color: var(--bg-primary);
-  text-align: center;
-  font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.marketplaceButton:hover {
-  background-color: var(--accent-hover);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow);
 }
 
 /* Sign Out Section */

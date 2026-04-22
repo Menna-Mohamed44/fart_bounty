@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, useRef, ReactNode } from 'react'
 import { User, Session, AuthError, AuthChangeEvent } from '@supabase/supabase-js'
 import { createClient, handleSupabaseError, type User as DatabaseUser, type Tables, type Inserts } from '../lib/supabaseClient'
 import { generateDisplayName, generateUniqueUsername } from '../lib/usernameGenerator'
@@ -37,55 +37,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
+  // Track which user ID we already fetched to skip duplicate fetches
+  // (e.g. INITIAL_SESSION then SIGNED_IN for the same user)
+  const lastFetchedId = useRef<string | null>(null)
+  const fetchInProgress = useRef(false)
+
   // Initialize auth state and listen for changes
+  // IMPORTANT: Keep this callback synchronous (no await) so the Supabase
+  // client can fire subsequent events without being blocked.
   useEffect(() => {
     let mounted = true
 
-    // Get initial session
-    const getInitialSession = async () => {
-      try {
-        const { data: { session }, error } = await supabase.auth.getSession()
-
-        if (error) {
-          throw error
-        }
-
-        if (mounted) {
-          setSession(session)
-          if (session?.user) {
-            await fetchUserProfile(session.user.id)
-          } else {
-            setUser(null)
-          }
-          setLoading(false)
-        }
-      } catch (error) {
-        if (mounted) {
-          setLoading(false)
-          handleSupabaseError(error)
-        }
-      }
-    }
-
-    getInitialSession()
-
-    // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event: AuthChangeEvent, session: Session | null) => {
+      (event: AuthChangeEvent, currentSession: Session | null) => {
         if (!mounted) return
 
-        // Skip INITIAL_SESSION — already handled by getInitialSession above
-        if (event === 'INITIAL_SESSION') return
+        setSession(currentSession)
 
-        setSession(session)
-
-        if (session?.user) {
-          await fetchUserProfile(session.user.id)
-        } else {
+        if (!currentSession?.user) {
           setUser(null)
+          lastFetchedId.current = null
+          setLoading(false)
         }
-
-        setLoading(false)
       }
     )
 
@@ -94,6 +67,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
       subscription.unsubscribe()
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Fetch user profile whenever session user changes
+  useEffect(() => {
+    let cancelled = false
+    const userId = session?.user?.id
+
+    if (!userId) return
+
+    // Skip if we already fetched this exact user and have profile data
+    if (lastFetchedId.current === userId && user?.id === userId) {
+      setLoading(false)
+      return
+    }
+
+    // Skip if a fetch for this user is already in progress
+    if (fetchInProgress.current) return
+
+    fetchInProgress.current = true
+    fetchUserProfile(userId).finally(() => {
+      fetchInProgress.current = false
+      if (!cancelled) {
+        lastFetchedId.current = userId
+        setLoading(false)
+      }
+    })
+
+    return () => { cancelled = true }
+  }, [session?.user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fetch user profile from database
   const fetchUserProfile = async (userId: string): Promise<void> => {
@@ -286,9 +287,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return { user: null, error }
       }
 
-      // User profile will be fetched automatically via the auth state listener
+      // Eagerly set session and fetch profile before returning
+      // so user state is populated before callers navigate
+      if (data.session) {
+        setSession(data.session)
+      }
+      if (data.user) {
+        fetchInProgress.current = true
+        await fetchUserProfile(data.user.id)
+        lastFetchedId.current = data.user.id
+        fetchInProgress.current = false
+      }
+
       return { user: user, error: null }
     } catch (error: any) {
+      fetchInProgress.current = false
       // Return a generic error without throwing
       return { 
         user: null, 
@@ -318,10 +331,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return { user: null, error }
       }
 
-      // User profile will be created automatically via the auth state listener
-      // Username and display name will be auto-generated in createUserProfile
+      // Eagerly set session and create profile before returning
+      if (data.session) {
+        setSession(data.session)
+      }
+      if (data.user) {
+        fetchInProgress.current = true
+        await fetchUserProfile(data.user.id)
+        lastFetchedId.current = data.user.id
+        fetchInProgress.current = false
+      }
+
       return { user: user, error: null }
     } catch (error: any) {
+      fetchInProgress.current = false
       // Return a generic error without throwing
       return { 
         user: null, 
@@ -385,7 +408,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return { error }
       }
 
-      // State will be cleared automatically via the auth state listener
+      // Clear state immediately so callers can navigate without stale data
+      setUser(null)
+      setSession(null)
+      lastFetchedId.current = null
+
       return { error: null }
     } catch (error: any) {
       // Return a generic error without throwing

@@ -84,13 +84,14 @@ export function RoleProvider({ children }: { children: ReactNode }) {
         .from('user_roles')
         .select('*')
         .eq('user_id', user.id)
-        .single()
+        .maybeSingle()
 
       if (error) {
         // PGRST116 = no rows found (normal for users without a role)
         // 42P01 = table doesn't exist yet (migration not run)
-        // Also handle empty error objects from Supabase
+        // 406 = Not Acceptable (PostgREST header issue, treat as no row)
         const isExpected = error.code === 'PGRST116' || error.code === '42P01' ||
+          error.code === '406' || String(error.status) === '406' ||
           (error.message && error.message.includes('does not exist'))
         if (!isExpected) {
           console.warn('Error fetching user role:', error.code, error.message)
